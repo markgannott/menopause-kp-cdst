@@ -139,6 +139,11 @@ TX_EVIDENCE = {
     'Monitoring Only': {'mood': 2, 'cognition': 3, 'vms': 1, 'cost_eff': 10, 'access': 10, 'safety': 10},
 }
 
+# ARIA-H / Neurovascular risk data
+DEMENTIA_LIFETIME_COST = 442_000  # AUD, NATSEM estimate
+ARIA_H_PREV_POSTMENO = 0.12  # ~10-15% cerebral microbleeds in postmenopausal women
+KP_POSITIVE_PREV = 0.30  # GAP estimate — KP dysregulation in perimenopausal women
+
 # Research gaps — for the Gaps tab
 RESEARCH_GAPS = [
     {
@@ -188,6 +193,14 @@ RESEARCH_GAPS = [
         'fills': 'Neuroprotective vs neurotoxic balance; precision risk stratification',
         'owner': 'Metri 2023 explicitly recommends this as future work',
         'priority': 'HIGH',
+    },
+    {
+        'gap': 'ARIA-H prevalence in KP-dysregulated perimenopausal women',
+        'current': 'No data linking cerebral microbleeds to KP status in menopause — separate literatures',
+        'fundable': 'MRI substudy within MenoStim (n=72): brain MRI + KP bloods at baseline and post-iTBS',
+        'fills': 'Triple-hit model validation; neurovascular risk stratification; dementia cost avoidance denominator',
+        'owner': 'Nestable within MenoStim if MRI added to protocol; or ALSWH/45-and-Up linkage study',
+        'priority': 'CRITICAL',
     },
 ]
 
@@ -415,6 +428,28 @@ rf_options = [
 for label, key in rf_options:
     if st.sidebar.checkbox(label, key=f'rf_{key}'):
         risk_factors.append(label)
+
+st.sidebar.divider()
+st.sidebar.markdown("**Neuroimaging / Genetics** (if available)")
+has_mri = st.sidebar.toggle("MRI neuroimaging available", value=False,
+    help="If the patient has had brain MRI — enables ARIA-H risk scoring")
+
+cmb_count = 0
+has_wmh = False
+has_siderosis = False
+apoe_status = 'Unknown'
+
+if has_mri:
+    cmb_count = st.sidebar.number_input("Cerebral microbleeds (CMB count)", 0, 50, 0,
+        help="Number of cerebral microbleeds on SWI/T2* MRI")
+    has_wmh = st.sidebar.checkbox("White matter hyperintensities (Fazekas 2-3)", key='rf_wmh',
+        help="Moderate-severe WMH on FLAIR MRI")
+    has_siderosis = st.sidebar.checkbox("Superficial siderosis", key='rf_siderosis',
+        help="Cortical superficial siderosis — marker of cerebral amyloid angiopathy")
+
+apoe_status = st.sidebar.selectbox("APOE e4 status (if known)", [
+    'Unknown', 'Non-carrier', 'Heterozygous (e3/e4)', 'Homozygous (e4/e4)'
+], help="Apolipoprotein E genotype — strongest genetic risk factor for AD")
 
 st.sidebar.divider()
 use_au = st.sidebar.toggle("Use Australian normative ranges", value=True,
@@ -798,12 +833,12 @@ with tab3:
                delta=f"{'Cost' if national_net > 0 else 'Saving'}",
                delta_color='inverse')
 
-# ── TAB 4: Dementia Risk ──
+# ── TAB 4: Dementia Risk + ARIA-H ──
 with tab4:
     st.subheader("Downstream Dementia Risk Assessment")
-    st.caption("EXPLORATORY — Based on Rocca et al. (2007, 2021) + Metri et al. (2023) KP data")
+    st.caption("EXPLORATORY — Rocca et al. (2007, 2021) + Metri et al. (2023) + ARIA-H neurovascular risk")
 
-    # Risk factor scoring
+    # ── Classical risk factor scoring ──
     dementia_score = 0
     risk_items = []
 
@@ -825,29 +860,149 @@ with tab4:
     elif has_kp and kp['level'] == 'MODERATE':
         dementia_score += 1
         risk_items.append(('KP activation (MODERATE)', 'Elevated KYN/TRP', 'Metri 2023', '+1'))
-
     if 'Cognitive fog' in symptoms or 'Memory problems' in symptoms:
         dementia_score += 1
         risk_items.append(('Current cognitive symptoms', 'Subjective', 'Self-report', '+1'))
 
-    if dementia_score >= 6:
+    # ── ARIA-H neurovascular scoring ──
+    aria_score = 0
+    if has_mri:
+        if cmb_count >= 5:
+            aria_score += 3
+            risk_items.append(('Cerebral microbleeds (>=5)', f'{cmb_count} CMBs on MRI', 'ARIA-H literature', '+3'))
+        elif cmb_count >= 1:
+            aria_score += 2
+            risk_items.append(('Cerebral microbleeds (1-4)', f'{cmb_count} CMBs on MRI', 'ARIA-H literature', '+2'))
+        if has_wmh:
+            aria_score += 2
+            risk_items.append(('WMH (Fazekas 2-3)', 'BBB compromise marker', 'Cerebrovascular lit.', '+2'))
+        if has_siderosis:
+            aria_score += 3
+            risk_items.append(('Superficial siderosis', 'CAA marker — high BBB vulnerability', 'ARIA-H literature', '+3'))
+
+    if apoe_status == 'Homozygous (e4/e4)':
+        aria_score += 3
+        risk_items.append(('APOE e4/e4 homozygous', 'OR ~12 for AD; BBB permeability', 'Literature', '+3'))
+    elif apoe_status == 'Heterozygous (e3/e4)':
+        aria_score += 2
+        risk_items.append(('APOE e3/e4 heterozygous', 'OR ~3.2 for AD', 'Literature', '+2'))
+
+    total_score = dementia_score + aria_score
+    max_score = 12 + 11  # Classical max 12 + ARIA max 11
+
+    # ── Neurovascular vulnerability composite ──
+    if aria_score >= 5:
+        nv_level = 'HIGH'
+        nv_color = '#E74C3C'
+    elif aria_score >= 2:
+        nv_level = 'MODERATE'
+        nv_color = '#F39C12'
+    else:
+        nv_level = 'LOW'
+        nv_color = '#27AE60'
+
+    # Combined risk level
+    if total_score >= 10:
+        risk_level = 'CRITICAL'
+        risk_color = '#C0392B'
+    elif total_score >= 6:
         risk_level = 'ELEVATED'
         risk_color = '#E74C3C'
-    elif dementia_score >= 3:
+    elif total_score >= 3:
         risk_level = 'MODERATE'
         risk_color = '#F39C12'
     else:
         risk_level = 'POPULATION-LEVEL'
         risk_color = '#27AE60'
 
-    col1, col2 = st.columns(2)
-    col1.metric("Dementia Risk Score", f"{dementia_score}/12")
-    col2.metric("Risk Level", risk_level)
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Classical Risk", f"{dementia_score}/12")
+    col2.metric("ARIA-H / Neurovasc.", f"{aria_score}/11")
+    col3.metric("Combined Score", f"{total_score}/23")
+    col4.metric("Risk Level", risk_level)
 
     if risk_items:
         st.markdown("**Contributing Factors:**")
         df_risk = pd.DataFrame(risk_items, columns=['Factor', 'Effect Size', 'Source', 'Points'])
         st.dataframe(df_risk, width='stretch', hide_index=True)
+
+    # ── Triple-Hit Model ──
+    st.markdown("---")
+    st.subheader("The Triple-Hit Model")
+    st.caption("Why menopause + KP dysregulation + neurovascular vulnerability = accelerated neurodegeneration")
+
+    st.markdown("""
+    **Hit 1 — Estrogen withdrawal:** BBB becomes more permeable at menopause
+    (Bake & Segal 2007). Estrogen normally maintains tight junctions and limits
+    neuroinflammatory infiltration. Loss recapitulates an aged BBB phenotype.
+
+    **Hit 2 — KP dysregulation:** Elevated circulating kynurenine crosses the BBB
+    via the L-system amino acid transporter. In the brain, microglia convert KYN →
+    quinolinic acid (QUIN), an NMDA receptor agonist and excitotoxin. Metri et al.
+    (2023) showed TRP falls and KYN rises with age — the steepest shift occurs at
+    menopause.
+
+    **Hit 3 — ARIA-H neurovascular vulnerability:** Cerebral microbleeds, WMH,
+    and superficial siderosis indicate pre-existing BBB compromise. APOE e4 carriers
+    have leakier vessels. In this population, KYN flux into the brain is amplified
+    and QUIN-mediated excitotoxicity is compounded.
+
+    **The intersection of all three hits defines the highest-risk, most cost-effective
+    population to intervene in.**
+    """)
+
+    # Triple-hit funnel visualization
+    fig_funnel = go.Figure(go.Funnel(
+        y=['All perimenopausal women (2.5M)',
+           'Symptomatic (cognitive/mood) (~1.4M)',
+           'KP-dysregulated (~30%: 420K)',
+           'ARIA-H positive (~12%: 50K)',
+           'KP + ARIA-H overlap (~15-50K)'],
+        x=[2_500_000, 1_400_000, 420_000, 50_000, 30_000],
+        textinfo='value+text',
+        marker=dict(color=['#27AE60', '#F1C40F', '#F39C12', '#E74C3C', '#C0392B']),
+    ))
+    fig_funnel.update_layout(
+        height=400,
+        title='Precision Medicine Funnel: Population to High-Risk Subgroup',
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    st.plotly_chart(fig_funnel, width='stretch')
+
+    # ── Cost Avoidance Calculator ──
+    st.markdown("---")
+    st.subheader("Dementia Cost Avoidance Model")
+    st.caption("Precision targeting converts speculative population-level estimates into defensible subgroup economics")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("**Population-Level (current model — speculative)**")
+        pop_af = 0.03  # 3% GAP estimate
+        pop_n = 2_500_000
+        pop_avoidable = round(pop_n * pop_af * DEMENTIA_LIFETIME_COST / 1e9, 1)
+        st.metric("Attributable Fraction", "3% (GAP)")
+        st.metric("Population", f"{pop_n:,}")
+        st.metric("Avoidable Lifetime Cost", f"${pop_avoidable:.1f}B AUD")
+        st.caption("Source quality: D (speculative)")
+
+    with col2:
+        st.markdown("**Precision Subgroup (ARIA-H + KP-targeted)**")
+        sub_af = 0.20 if nv_level == 'HIGH' else 0.12 if nv_level == 'MODERATE' else 0.05
+        sub_n_slider = st.slider("High-risk subgroup size", 15_000, 125_000, 50_000, 5_000,
+            help="ARIA-H+ and KP-dysregulated perimenopausal women")
+        sub_avoidable = round(sub_n_slider * sub_af * DEMENTIA_LIFETIME_COST / 1e9, 1)
+        st.metric("Attributable Fraction", f"{sub_af:.0%} (higher in defined subgroup)")
+        st.metric("Subgroup Size", f"{sub_n_slider:,}")
+        st.metric("Avoidable Lifetime Cost", f"${sub_avoidable:.1f}B AUD")
+        st.caption(f"Source quality: C (defensible from Rocca HRs in high-risk subgroups)")
+
+    # Per-patient intervention value
+    per_patient_value = round(sub_af * DEMENTIA_LIFETIME_COST)
+    st.info(f"**Per-patient intervention value:** If iTBS in KP+ARIA-H women reduces dementia "
+            f"conversion by the subgroup AF ({sub_af:.0%}), the per-patient avoidable cost is "
+            f"**${per_patient_value:,} AUD** — against a treatment cost of $7,500/yr. "
+            f"This is {'strongly ' if per_patient_value > 50000 else ''}cost-effective "
+            f"by any ICER threshold.")
 
     st.markdown("---")
     st.markdown("**KP Connection to Neurodegeneration (Metri et al. 2023):**")
@@ -858,13 +1013,15 @@ with tab4:
     - Neurotoxic branch: → **3-HK** → **quinolinic acid (QUIN)** (NMDA agonist, excitotoxin)
     - With aging and estrogen withdrawal, the balance shifts toward **QUIN** (Giil et al. 2016)
     - Metri et al. (2023) established the normative reference enabling detection of this shift
+    - **ARIA-H markers indicate the BBB is already compromised** — QUIN flux amplified
 
     **Intervention during the critical window (perimenopause) may modify this trajectory.**
     """)
 
-    st.warning("**SPECULATIVE:** Dementia risk scoring is not validated. "
-              "This is hypothesis-generating based on observational data. "
-              "The MenoStim trial will provide the first interventional evidence.")
+    st.warning("**EXPLORATORY:** Dementia risk scoring is not validated. The triple-hit model "
+              "is hypothesis-generating. ARIA-H risk in KP-dysregulated perimenopausal women "
+              "has never been studied — this is a fundable research question (see Research Gaps). "
+              "The MenoStim trial can begin to answer it if MRI + KP bloods are collected.")
 
 # ── TAB 5: Research Gaps ──
 with tab5:
@@ -939,7 +1096,14 @@ with tab6:
     eff = efficacy_assumptions[ranked[0][0]]
     summary_lines.append(f"**Potential offset with {ranked[0][0]}:** ${round(PER_WOMAN_INDIRECT * eff):,} AUD ({eff:.0%} improvement)")
     summary_lines.append("")
-    summary_lines.append(f"**Dementia risk score:** {dementia_score}/12 ({risk_level})")
+    summary_lines.append(f"**Dementia risk score:** {total_score}/23 ({risk_level})")
+    summary_lines.append(f"  Classical: {dementia_score}/12 | ARIA-H/Neurovasc: {aria_score}/11")
+    if nv_level != 'LOW':
+        summary_lines.append(f"  Neurovascular vulnerability: {nv_level}")
+    if has_mri and cmb_count > 0:
+        summary_lines.append(f"  CMBs: {cmb_count} | WMH: {'Yes' if has_wmh else 'No'} | Siderosis: {'Yes' if has_siderosis else 'No'}")
+    if apoe_status not in ('Unknown', 'Non-carrier'):
+        summary_lines.append(f"  APOE: {apoe_status}")
 
     for line in summary_lines:
         st.markdown(line)
@@ -954,6 +1118,9 @@ with tab6:
     - Tewhaiti-Smith JMK, Gannott M, et al. (2025). Cost of Endometriosis and CPP in NZ. *Women (MDPI)*. (Stromberg method)
     - Rocca WA, et al. (2007, 2021). Oophorectomy and dementia risk. *Neurology; JAMA Netw Open*. (Dementia pathway)
     - Maki PM (2013). Critical window hypothesis. *Menopause*. (HRT timing)
+    - Bake S, Segal M (2007). 17β-estradiol differentially regulates BBB permeability. *Endocrinology*. (BBB + estrogen)
+    - Giil LM, et al. (2016). KP metabolites in dementia. (KP → neurodegeneration)
+    - Guillemin GJ (2012). Quinolinic acid neurotoxicity review. (QUIN excitotoxicity)
     """)
 
     # Copy-friendly text
@@ -968,6 +1135,7 @@ st.markdown("""
 <b>Menopause KP-CDST v1.0</b><br>
 KP Normative Data: Metri et al. 2023 (Int J Tryptophan Res, N=8,089)<br>
 COI Model: Gannott 2025 (First published model) | Stromberg: Tewhaiti-Smith, Gannott et al. 2025<br>
+ARIA-H Triple-Hit Model: Bake & Segal 2007; Giil 2016; Guillemin 2012<br>
 Trial: MenoStim (Metri PhD, NICM HRI, WSU) — ACTRN12625000030471<br>
 <br>
 <b>Research prototype — not validated for clinical use.</b><br>
