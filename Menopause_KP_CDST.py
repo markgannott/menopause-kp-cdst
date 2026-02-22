@@ -976,32 +976,31 @@ with tab4:
 
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("**Population-Level (current model — speculative)**")
-        pop_af = 0.03  # 3% GAP estimate
+        st.markdown("**Population-Level Estimate**")
+        pop_af = st.slider("Population AF (%)", 1.0, 10.0, 3.0, 0.5,
+            help="Menopause-attributable fraction for dementia — no published estimate exists (GAP)") / 100
         pop_n = 2_500_000
         pop_avoidable = round(pop_n * pop_af * DEMENTIA_LIFETIME_COST / 1e9, 1)
-        st.metric("Attributable Fraction", "3% (GAP)")
         st.metric("Population", f"{pop_n:,}")
         st.metric("Avoidable Lifetime Cost", f"${pop_avoidable:.1f}B AUD")
-        st.caption("Source quality: D (speculative)")
+        st.caption(f"AF = {pop_af:.1%} | Source quality: D (GAP — no published data)")
 
     with col2:
         st.markdown("**Precision Subgroup (ARIA-H + KP-targeted)**")
-        sub_af = 0.20 if nv_level == 'HIGH' else 0.12 if nv_level == 'MODERATE' else 0.05
+        default_sub_af = 20.0 if nv_level == 'HIGH' else 12.0 if nv_level == 'MODERATE' else 5.0
+        sub_af = st.slider("Subgroup AF (%)", 5.0, 40.0, default_sub_af, 1.0,
+            help="Higher AF defensible in defined high-risk subgroup (Rocca HRs in surgical menopause)") / 100
         sub_n_slider = st.slider("High-risk subgroup size", 15_000, 125_000, 50_000, 5_000,
             help="ARIA-H+ and KP-dysregulated perimenopausal women")
         sub_avoidable = round(sub_n_slider * sub_af * DEMENTIA_LIFETIME_COST / 1e9, 1)
-        st.metric("Attributable Fraction", f"{sub_af:.0%} (higher in defined subgroup)")
-        st.metric("Subgroup Size", f"{sub_n_slider:,}")
         st.metric("Avoidable Lifetime Cost", f"${sub_avoidable:.1f}B AUD")
-        st.caption(f"Source quality: C (defensible from Rocca HRs in high-risk subgroups)")
+        st.caption(f"AF = {sub_af:.0%} | Source quality: C (defensible, screenable population)")
 
     # Per-patient intervention value
     per_patient_value = round(sub_af * DEMENTIA_LIFETIME_COST)
-    st.info(f"**Per-patient intervention value:** If iTBS in KP+ARIA-H women reduces dementia "
-            f"conversion by the subgroup AF ({sub_af:.0%}), the per-patient avoidable cost is "
+    st.info(f"**Per-patient intervention value:** At {sub_af:.0%} AF, avoidable cost per patient is "
             f"**${per_patient_value:,} AUD** — against a treatment cost of $7,500/yr. "
-            f"This is {'strongly ' if per_patient_value > 50000 else ''}cost-effective "
+            f"{'Strongly cost-effective' if per_patient_value > 50000 else 'Cost-effective'} "
             f"by any ICER threshold.")
 
     st.markdown("---")
