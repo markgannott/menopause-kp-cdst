@@ -1,0 +1,1419 @@
+<title>Menopause KP-CDST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ── Tokens: complete light palette on bare :root ───────────────── */
+:root{
+  --ground:#F6F7F9;
+  --surface:#FFFFFF;
+  --surface-sunk:#EDEFF3;
+  --line:#DCE0E7;
+  --line-soft:#E8EBF0;
+  --ink:#151A1F;
+  --ink-2:#3D4752;
+  --ink-3:#6B7683;
+  --accent:#B23A2E;
+  --accent-soft:#F6E7E4;
+  --ok:#2E7D5B;
+  --ok-soft:#E3F1EA;
+  --mild:#B8910F;
+  --mild-soft:#F7F0DA;
+  --warn:#C8730D;
+  --warn-soft:#FBEDDD;
+  --crit:#B23A2E;
+  --crit-soft:#F6E7E4;
+  --info-soft:#E7EDF6;
+  --info-line:#C3D2E8;
+  --tx-itbs:#B23A2E;
+  --tx-mht:#2E6DA4;
+  --tx-ssri:#C8730D;
+  --tx-cbt:#2E7D5B;
+  --tx-mon:#7A8794;
+  --focus:#2E6DA4;
+  --shadow:0 1px 2px rgba(21,26,31,.06),0 8px 24px -16px rgba(21,26,31,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#101418;
+    --surface:#171C22;
+    --surface-sunk:#1E242B;
+    --line:#2C343D;
+    --line-soft:#242B33;
+    --ink:#E9ECEF;
+    --ink-2:#B7C0C9;
+    --ink-3:#8792A0;
+    --accent:#E4705F;
+    --accent-soft:#33201D;
+    --ok:#5FBD90;
+    --ok-soft:#16291F;
+    --mild:#D8B341;
+    --mild-soft:#2A2415;
+    --warn:#E39A4A;
+    --warn-soft:#2E2217;
+    --crit:#E4705F;
+    --crit-soft:#33201D;
+    --info-soft:#1B232E;
+    --info-line:#2F3E51;
+    --tx-itbs:#E4705F;
+    --tx-mht:#68A3D8;
+    --tx-ssri:#E39A4A;
+    --tx-cbt:#5FBD90;
+    --tx-mon:#8E9AA6;
+    --focus:#68A3D8;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101418;
+  --surface:#171C22;
+  --surface-sunk:#1E242B;
+  --line:#2C343D;
+  --line-soft:#242B33;
+  --ink:#E9ECEF;
+  --ink-2:#B7C0C9;
+  --ink-3:#8792A0;
+  --accent:#E4705F;
+  --accent-soft:#33201D;
+  --ok:#5FBD90;
+  --ok-soft:#16291F;
+  --mild:#D8B341;
+  --mild-soft:#2A2415;
+  --warn:#E39A4A;
+  --warn-soft:#2E2217;
+  --crit:#E4705F;
+  --crit-soft:#33201D;
+  --info-soft:#1B232E;
+  --info-line:#2F3E51;
+  --tx-itbs:#E4705F;
+  --tx-mht:#68A3D8;
+  --tx-ssri:#E39A4A;
+  --tx-cbt:#5FBD90;
+  --tx-mon:#8E9AA6;
+  --focus:#68A3D8;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Spectral,Georgia,"Times New Roman",serif;font-weight:600;text-wrap:balance;margin:0}
+.mono,.num{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+
+/* ── Shell ───────────────────────────────────────────────────────── */
+.wrap{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:0 56px}
+
+header.top{padding-block:28px 18px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1.title{font-size:clamp(28px,4.2vw,40px);letter-spacing:-.01em;margin-top:6px}
+.subtitle{font-family:Spectral,Georgia,serif;font-style:italic;color:var(--ink-2);font-size:clamp(15px,2vw,17px);margin-top:4px;max-width:62ch}
+.provenance{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.chip{
+  display:inline-flex;align-items:baseline;gap:6px;
+  border:1px solid var(--line);background:var(--surface);
+  padding:5px 10px;border-radius:2px;font-size:12px;color:var(--ink-2);
+}
+.chip b{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.chip.flag{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+
+.banner{
+  margin-top:16px;border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:10px 14px;font-size:13px;color:var(--ink-2);border-radius:0 2px 2px 0;
+}
+.banner b{color:var(--ink)}
+
+details.about{margin-top:14px;border:1px solid var(--line);background:var(--surface);border-radius:2px}
+details.about>summary{cursor:pointer;padding:10px 14px;font-size:13px;font-weight:600;color:var(--ink-2);list-style:none}
+details.about>summary::-webkit-details-marker{display:none}
+details.about>summary::before{content:"+ ";font-family:"IBM Plex Mono",monospace;color:var(--accent)}
+details.about[open]>summary::before{content:"− "}
+.about-body{padding:0 14px 16px;font-size:14px;color:var(--ink-2);display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.about-body h4{font-size:14px;color:var(--ink);margin-bottom:4px}
+.about-body ul,.about-body ol{margin:0;padding-left:18px}
+.about-body li{margin-bottom:3px}
+
+/* ── Two-column app ─────────────────────────────────────────────── */
+.app{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;margin-top:24px;align-items:start}
+@media (max-width:900px){.app{grid-template-columns:1fr;gap:20px}}
+
+aside.panel{
+  position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);
+}
+@media (max-width:900px){aside.panel{position:static;max-height:none}}
+.panel-head{padding:14px 16px 12px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel-head h2{font-size:17px}
+.panel-sec{padding:14px 16px;border-bottom:1px solid var(--line-soft)}
+.panel-sec:last-child{border-bottom:0}
+.sec-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:10px}
+
+label.field{display:block;font-size:13px;color:var(--ink-2);margin-bottom:10px}
+label.field:last-child{margin-bottom:0}
+label.field>span.lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+label.field .val{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600}
+select,input[type="number"]{
+  width:100%;padding:7px 9px;font:inherit;font-size:13px;
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:2px;
+}
+input[type="number"]{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+input[type="range"]{width:100%;accent-color:var(--accent);margin:2px 0 0}
+.check{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink-2);padding:3px 0;cursor:pointer}
+.check input{accent-color:var(--accent);margin-top:3px;flex:none}
+.hint{font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.4}
+.switch{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2);cursor:pointer;font-weight:500}
+.switch input{accent-color:var(--accent);width:15px;height:15px;flex:none}
+.btn{
+  font:inherit;font-size:12px;font-weight:600;padding:6px 11px;cursor:pointer;
+  background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-radius:2px;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{opacity:.9;color:#fff}
+
+/* ── Main ───────────────────────────────────────────────────────── */
+main{min-width:0}
+.summary-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;overflow:hidden;box-shadow:var(--shadow);
+}
+.summary-strip>div{padding:12px 16px;border-right:1px solid var(--line-soft)}
+.summary-strip>div:last-child{border-right:0}
+.s-lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.s-val{font-family:Spectral,Georgia,serif;font-size:23px;line-height:1.25;margin-top:2px;font-variant-numeric:tabular-nums}
+.s-val.sm{font-size:17px;padding-top:4px}
+
+nav.tabs{display:flex;gap:2px;overflow-x:auto;margin-top:22px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+nav.tabs button{
+  font:inherit;font-size:13.5px;font-weight:500;white-space:nowrap;cursor:pointer;
+  background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-3);
+  padding:9px 13px;margin-bottom:-1px;
+}
+nav.tabs button:hover{color:var(--ink)}
+nav.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+section.tabpanel{padding-top:22px}
+section.tabpanel[hidden]{display:none}
+.tab-head{margin-bottom:16px}
+.tab-head h3{font-size:22px}
+.tab-head p{margin:3px 0 0;font-size:13px;color:var(--ink-3)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px;box-shadow:var(--shadow)}
+.card+.card{margin-top:16px}
+.card h4{font-size:16px;margin-bottom:3px}
+.card .cap{font-size:12px;color:var(--ink-3);margin:0 0 14px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+
+.metric .m-lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.metric .m-val{font-family:Spectral,Georgia,serif;font-size:26px;line-height:1.2;margin-top:2px;font-variant-numeric:tabular-nums}
+.metric .m-sub{font-size:12px;color:var(--ink-3);margin-top:2px;font-family:"IBM Plex Mono",monospace}
+
+.pill{display:inline-block;padding:3px 9px;border-radius:100px;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.mild{background:var(--mild-soft);color:var(--mild)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.pill.mut{background:var(--surface-sunk);color:var(--ink-3)}
+
+.note{border-left:3px solid var(--info-line);background:var(--info-soft);padding:11px 14px;font-size:13.5px;color:var(--ink-2);border-radius:0 2px 2px 0;margin-top:14px}
+.note.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.note.good{border-left-color:var(--ok);background:var(--ok-soft)}
+.note b{color:var(--ink)}
+
+.tablewrap{overflow-x:auto;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:480px}
+th,td{text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;border-bottom-color:var(--line)}
+td.n,th.n{text-align:right;padding-right:16px;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+tbody tr:last-child td{border-bottom:0}
+
+/* charts */
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font-family:"IBM Plex Mono",monospace;font-size:11px}
+.axis-line{stroke:var(--line);stroke-width:1}
+.zero-line{stroke:var(--ink-3);stroke-width:1}
+.thresh-line{stroke:var(--crit);stroke-width:1;stroke-dasharray:4 3}
+.grid-line{stroke:var(--line-soft);stroke-width:1}
+.tick{fill:var(--ink-3)}
+.bar-lab{fill:var(--ink-2);font-weight:500}
+.axis-title{fill:var(--ink-3);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+
+/* treatment ranking */
+.rank-row{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.rank-row:last-of-type{border-bottom:0}
+.rank-n{font-family:Spectral,Georgia,serif;font-size:19px;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums}
+.rank-row.first .rank-n{color:var(--accent)}
+.rank-bar-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13.5px}
+.rank-bar-head b{font-weight:600}
+.rank-track{height:7px;background:var(--surface-sunk);border-radius:100px;margin-top:5px;overflow:hidden}
+.rank-fill{height:100%;border-radius:100px;transition:width .35s ease}
+@media (prefers-reduced-motion:reduce){.rank-fill{transition:none}}
+
+details.tx{border:1px solid var(--line);border-radius:2px;margin-top:10px;background:var(--surface)}
+details.tx[open]{border-color:var(--line)}
+details.tx>summary{cursor:pointer;padding:11px 14px;font-size:14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+details.tx>summary::-webkit-details-marker{display:none}
+details.tx>summary .sc{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-3);font-weight:500}
+.tx-body{padding:0 14px 14px;border-top:1px solid var(--line-soft);padding-top:12px}
+.tx-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:10px}
+.tx-desc{font-size:13.5px;color:var(--ink-2);margin:0}
+
+.funnel{display:grid;gap:6px;margin-top:14px}
+.funnel-row{display:flex;align-items:center;gap:12px}
+.funnel-bar{height:38px;display:flex;align-items:center;padding-left:12px;border-radius:2px;color:#fff;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;min-width:90px}
+.funnel-lab{font-size:12.5px;color:var(--ink-2);flex:1;min-width:0}
+
+.gap-item{border:1px solid var(--line);border-radius:2px;margin-top:10px;background:var(--surface)}
+.gap-item>summary{cursor:pointer;padding:11px 14px;font-size:14px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:baseline}
+.gap-item>summary::-webkit-details-marker{display:none}
+.gap-body{padding:2px 14px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;font-size:13.5px;color:var(--ink-2)}
+.gap-body .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;display:block;margin-bottom:2px}
+
+textarea{
+  width:100%;min-height:260px;padding:12px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.6;
+  background:var(--surface-sunk);color:var(--ink);border:1px solid var(--line);border-radius:2px;resize:vertical;
+}
+.refs{font-size:12.5px;color:var(--ink-2);padding-left:18px;margin:6px 0 0}
+.refs li{margin-bottom:4px}
+.refs i{color:var(--ink-3)}
+
+footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--ink-3);line-height:1.7}
+footer b{color:var(--ink-2)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Clinical Decision Support · Research Prototype</div>
+  <h1 class="title">Menopause KP-CDST</h1>
+  <p class="subtitle">Kynurenine pathway–guided treatment selection for menopausal cognitive &amp; mood symptoms</p>
+  <div class="provenance">
+    <span class="chip"><b>8,089</b> individuals</span>
+    <span class="chip"><b>120</b> studies</span>
+    <span class="chip"><b>31</b> countries</span>
+    <span class="chip">Metri et al. 2023 normative KP data</span>
+    <span class="chip">COI: Gannott 2025</span>
+    <span class="chip flag">Not for clinical use</span>
+  </div>
+  <div class="banner">
+    <b>Research prototype.</b> Not validated for clinical use. The KP risk algorithm has not been tested against clinical
+    outcomes, and all iTBS efficacy assumptions are conditional on the MenoStim trial (ACTRN12625000030471).
+    For decision <i>support</i> only — never a substitute for clinical judgement.
+  </div>
+
+  <details class="about">
+    <summary>About this tool — the menopause–KP connection</summary>
+    <div class="about-body">
+      <div>
+        <h4>Why the pathway matters here</h4>
+        <ul>
+          <li>Women have significantly <b>lower baseline TRP</b> (β = −0.22, p = .012)</li>
+          <li>TRP <b>falls with age</b> (β = −0.74, p &lt; .001) while KYN <b>rises</b> (β = 0.02, p &lt; .001)</li>
+          <li>The shift runs toward <b>neurotoxic metabolites</b> at precisely the menopause transition</li>
+          <li>KP dysregulation is linked to depression, dementia, CVD and T2DM</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Economic context</h4>
+        <ul>
+          <li>National burden: <b>$41.9B AUD/yr</b> (first published COI model)</li>
+          <li>Per-woman productivity loss: <b>$25,917 AUD/yr</b> (Stromberg-adjusted)</li>
+          <li>KP screening cost: <b>$80 AUD</b> (standard pathology HPLC)</li>
+          <li>KP-targeted iTBS cuts cost per responder by <b>61%</b> vs unselected</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Research throughline</h4>
+        <ol>
+          <li>KP normative data — Metri et al. 2023 (diagnostic foundation)</li>
+          <li>Complementary therapy landscape — Metri et al. 2026, <i>Climacteric</i> (gap identification)</li>
+          <li>iTBS for menopausal symptoms — MenoStim trial, Metri PhD (intervention)</li>
+          <li>Economic framework — Gannott 2025 COI + BIM (commercial case)</li>
+        </ol>
+      </div>
+    </div>
+  </details>
+</header>
+
+<div class="app">
+  <!-- ── Patient panel ─────────────────────────────────────────── -->
+  <aside class="panel">
+    <div class="panel-head">
+      <h2>Patient Profile</h2>
+      <button class="btn" id="btn-clear" type="button">Clear</button>
+    </div>
+
+    <div class="panel-sec">
+      <div class="sec-label">Demographics</div>
+      <label class="field" for="age">
+        <span class="lab">Age <span class="val" id="age-val">51</span></span>
+        <input type="range" id="age" min="40" max="65" step="1" value="51">
+      </label>
+      <label class="field" for="stage">
+        <span class="lab">Menopausal stage</span>
+        <select id="stage">
+          <option>Early perimenopause</option>
+          <option selected>Late perimenopause</option>
+          <option>Early postmenopause (&lt;5yr)</option>
+          <option>Late postmenopause (&gt;5yr)</option>
+          <option>Surgical menopause</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="panel-sec">
+      <div class="sec-label">Symptoms — select all that apply</div>
+      <div id="symptoms"></div>
+    </div>
+
+    <div class="panel-sec">
+      <div class="sec-label">KP Biomarkers</div>
+      <label class="switch" for="has-kp">
+        <input type="checkbox" id="has-kp" checked>
+        KP blood test results available
+      </label>
+      <div class="hint">Serum or plasma TRP and KYN, standard HPLC — about $80 AUD.</div>
+      <div id="kp-inputs" style="margin-top:12px">
+        <label class="field" for="sample-type">
+          <span class="lab">Sample type</span>
+          <select id="sample-type"><option value="serum" selected>serum</option><option value="plasma">plasma</option></select>
+        </label>
+        <label class="field" for="trp">
+          <span class="lab">TRP (µM)</span>
+          <input type="number" id="trp" min="5" max="150" step="1" value="67.26">
+          <span class="hint" id="trp-hint"></span>
+        </label>
+        <label class="field" for="kyn">
+          <span class="lab">KYN (µM)</span>
+          <input type="number" id="kyn" min="0.1" max="10" step="0.1" value="2.43">
+          <span class="hint" id="kyn-hint"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel-sec">
+      <div class="sec-label">Risk factors</div>
+      <div id="risk-factors"></div>
+    </div>
+
+    <div class="panel-sec">
+      <div class="sec-label">Neuroimaging / genetics</div>
+      <label class="switch" for="has-mri">
+        <input type="checkbox" id="has-mri">
+        MRI neuroimaging available
+      </label>
+      <div class="hint">Enables ARIA-H neurovascular scoring.</div>
+      <div id="mri-inputs" hidden style="margin-top:12px">
+        <label class="field" for="cmb">
+          <span class="lab">Cerebral microbleeds (count)</span>
+          <input type="number" id="cmb" min="0" max="50" step="1" value="0">
+          <span class="hint">On SWI/T2* MRI.</span>
+        </label>
+        <label class="check"><input type="checkbox" id="wmh"> White matter hyperintensities (Fazekas 2–3)</label>
+        <label class="check"><input type="checkbox" id="siderosis"> Superficial siderosis</label>
+      </div>
+      <label class="field" for="apoe" style="margin-top:12px">
+        <span class="lab">APOE ε4 status</span>
+        <select id="apoe">
+          <option selected>Unknown</option>
+          <option>Non-carrier</option>
+          <option>Heterozygous (e3/e4)</option>
+          <option>Homozygous (e4/e4)</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="panel-sec">
+      <label class="switch" for="use-au">
+        <input type="checkbox" id="use-au" checked>
+        Use Australian normative ranges
+      </label>
+      <div class="hint">Metri 2023: AU serum TRP 67.26 ± 11.19 vs global 60.52 ± 15.38 µM.</div>
+    </div>
+
+    <div class="panel-sec">
+      <div class="hint" style="line-height:1.6">
+        <b style="color:var(--ink-2)">Foundation:</b> Metri et al. 2023<br>
+        <b style="color:var(--ink-2)">COI model:</b> Gannott 2025<br>
+        <b style="color:var(--ink-2)">Trial:</b> MenoStim (Metri PhD)
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ──────────────────────────────────────────────────── -->
+  <main>
+    <div class="summary-strip" id="summary-strip"></div>
+
+    <nav class="tabs" role="tablist" id="tablist"></nav>
+
+    <section class="tabpanel" id="p-kp" role="tabpanel" aria-labelledby="t-kp"></section>
+    <section class="tabpanel" id="p-tx" role="tabpanel" aria-labelledby="t-tx" hidden></section>
+    <section class="tabpanel" id="p-cost" role="tabpanel" aria-labelledby="t-cost" hidden></section>
+    <section class="tabpanel" id="p-dem" role="tabpanel" aria-labelledby="t-dem" hidden></section>
+    <section class="tabpanel" id="p-gaps" role="tabpanel" aria-labelledby="t-gaps" hidden></section>
+    <section class="tabpanel" id="p-sum" role="tabpanel" aria-labelledby="t-sum" hidden></section>
+  </main>
+</div>
+
+<footer>
+  <b>Menopause KP-CDST v1.0</b><br>
+  KP normative data: Metri et al. 2023 (<i>Int J Tryptophan Res</i>, N = 8,089) · COI model: Gannott 2025<br>
+  Stromberg method: Tewhaiti-Smith, Gannott et al. 2025 · ARIA-H triple-hit: Bake &amp; Segal 2007; Giil 2016; Guillemin 2012<br>
+  Trial: MenoStim (Metri PhD, NICM HRI, WSU) — ACTRN12625000030471<br><br>
+  <b>Research prototype — not validated for clinical use.</b> Not a substitute for clinical judgement.
+</footer>
+</div>
+
+<script>
+"use strict";
+
+/* ══ Normative data — Metri et al. (2023) ══════════════════════ */
+const NORM = {
+  serum_trp:{mean:60.52,sd:15.38,unit:"µM"}, serum_kyn:{mean:1.96,sd:0.51,unit:"µM"},
+  plasma_trp:{mean:51.45,sd:10.47,unit:"µM"}, plasma_kyn:{mean:1.82,sd:0.54,unit:"µM"}
+};
+const NORM_AU = {
+  serum_trp:{mean:67.26,sd:11.19,unit:"µM"}, serum_kyn:{mean:2.43,sd:0.59,unit:"µM"},
+  plasma_trp:{mean:42.87,sd:8.51,unit:"µM"}, plasma_kyn:{mean:2.12,sd:0.52,unit:"µM"}
+};
+const AGE_EFFECTS = {serum_trp:{beta:-0.20},serum_kyn:{beta:0.01},plasma_trp:{beta:-0.74},plasma_kyn:{beta:0.02}};
+
+const TREATMENTS = {
+  "iTBS":{label:"Intermittent Theta-Burst Stimulation",annual_cost:7500,mbs_rebate:4080,oop:3420,
+    evidence_mood:"B",evidence_cog:"GAP",color:"var(--tx-itbs)",
+    desc:"Non-invasive brain stimulation targeting DLPFC. MBS Items 14216–14220. The MenoStim trial (Metri PhD, NICM HRI) is the FIRST to test this for menopausal symptoms."},
+  "MHT (HRT)":{label:"Menopausal Hormone Therapy",annual_cost:380,mbs_rebate:0,oop:380,
+    evidence_mood:"A",evidence_cog:"B",color:"var(--tx-mht)",
+    desc:"Estrogen ± progesterone. PBS $31.60/month from March 2025. First-line for VMS; may benefit mood and cognition during the critical window (Maki 2013)."},
+  "SSRI/SNRI":{label:"Antidepressant Medication",annual_cost:300,mbs_rebate:0,oop:300,
+    evidence_mood:"A",evidence_cog:"D",color:"var(--tx-ssri)",
+    desc:"Escitalopram, desvenlafaxine. PBS generic. Evidence for mood but NOT cognition — may worsen cognitive symptoms in some women."},
+  "CBT (Better Access)":{label:"Cognitive Behavioural Therapy",annual_cost:560,mbs_rebate:560,oop:0,
+    evidence_mood:"A",evidence_cog:"C",color:"var(--tx-cbt)",
+    desc:"MBS Better Access: 6 sessions/yr. Evidence for mood and hot flush coping. Limited direct evidence for menopausal cognitive symptoms."},
+  "Monitoring Only":{label:"Watchful Waiting + Lifestyle",annual_cost:320,mbs_rebate:165,oop:155,
+    evidence_mood:"C",evidence_cog:"C",color:"var(--tx-mon)",
+    desc:"GP monitoring plus lifestyle (exercise, sleep, stress management). Cognitive symptoms are often transient and reverse postmenopause (SWAN longitudinal)."}
+};
+
+const TX_EVIDENCE = {
+  "iTBS":{mood:6,cognition:3,vms:1,cost_eff:5,access:4,safety:8},
+  "MHT (HRT)":{mood:7,cognition:6,vms:10,cost_eff:9,access:9,safety:7},
+  "SSRI/SNRI":{mood:9,cognition:2,vms:5,cost_eff:9,access:10,safety:6},
+  "CBT (Better Access)":{mood:8,cognition:4,vms:6,cost_eff:8,access:7,safety:10},
+  "Monitoring Only":{mood:2,cognition:3,vms:1,cost_eff:10,access:10,safety:10}
+};
+
+const PER_WOMAN_INDIRECT = 25917;
+const STROMBERG = [
+  {bucket:"1. Employee absenteeism",aud:196,type:"Employee"},
+  {bucket:"2. Employer replacement (SA = 0.97)",aud:190,type:"Employer"},
+  {bucket:"3. Employee presenteeism",aud:13166,type:"Employee"},
+  {bucket:"4. Employer friction (SP = 0.54)",aud:7110,type:"Employer"},
+  {bucket:"5. WEP (SWEP = 0.72 × employer-side)",aud:5256,type:"Employer"}
+];
+const DEMENTIA_LIFETIME_COST = 442000;
+
+const SYMPTOM_OPTIONS = ["Cognitive fog","Memory problems","Depression","Anxiety","Hot flushes/VMS","Sleep disturbance","Fatigue","Difficulty concentrating at work"];
+const RF_OPTIONS = ["Early/surgical menopause (<45)","Family history of dementia","Bilateral oophorectomy","No current MHT use","History of depression"];
+
+const RESEARCH_GAPS = [
+  {gap:"KP dysregulation prevalence in perimenopausal women",priority:"HIGH",
+   current:"30% estimate (GAP) — extrapolated from the Metri 2023 age–sex regression, not menopause-specific",
+   fundable:"Cross-sectional KP profiling of 200–500 women stratified by menopausal stage (STRAW+10)",
+   fills:"BIM population funnel; CDST threshold calibration",
+   owner:"MenoStim can answer this with baseline KP data from n = 72"},
+  {gap:"Cognitive symptom attribution to productivity loss",priority:"HIGH",
+   current:"35% estimate (GAP) — based on Griffiths 2013 UK survey, not validated",
+   fundable:"WPAI-M (menopause-specific work productivity instrument) validation study",
+   fills:"COI cognitive burden sheet; per-symptom economic attribution",
+   owner:"Could be nested within MenoStim as a secondary outcome"},
+  {gap:"iTBS efficacy for menopausal cognitive/mood symptoms",priority:"CRITICAL",
+   current:"NO DATA — MenoStim is the FIRST trial",
+   fundable:"Phase III multi-site RCT following the MenoStim pilot (n = 72)",
+   fills:"BIM efficacy parameter; CDST treatment ranking validation",
+   owner:"Metri PhD — MenoStim trial (ACTRN12625000030471)"},
+  {gap:"KP biomarker response to iTBS",priority:"CRITICAL",
+   current:"No data on whether iTBS modifies the KYN/TRP ratio",
+   fundable:"Pre/post KP profiling within MenoStim (add-on to existing protocol)",
+   fills:"Mechanistic link; CDST biomarker-guided selection validation",
+   owner:"Metri — answerable if MenoStim collects bloods pre/post"},
+  {gap:"Menopause-attributable fraction for dementia",priority:"MEDIUM",
+   current:"3% estimate (GAP) — speculative, from Rocca observational HRs",
+   fundable:"Longitudinal cohort linking perimenopause KP levels to 10-year dementia incidence",
+   fills:"Dementia cost avoidance model; VDC estimation",
+   owner:"Requires ALSWH or 45-and-Up linkage — beyond a single trial"},
+  {gap:"KYNA/QUIN ratio in menopausal women",priority:"HIGH",
+   current:"Metri 2023 measured TRP and KYN only — not downstream metabolites",
+   fundable:"Extended KP metabolome (KYNA, QUIN, 3-HK, picolinic acid) in a menopause cohort",
+   fills:"Neuroprotective vs neurotoxic balance; precision risk stratification",
+   owner:"Metri 2023 explicitly recommends this as future work"},
+  {gap:"ARIA-H prevalence in KP-dysregulated perimenopausal women",priority:"CRITICAL",
+   current:"No data linking cerebral microbleeds to KP status in menopause — separate literatures",
+   fundable:"MRI substudy within MenoStim (n = 72): brain MRI + KP bloods at baseline and post-iTBS",
+   fills:"Triple-hit model validation; neurovascular risk stratification; dementia cost avoidance denominator",
+   owner:"Nestable within MenoStim if MRI is added; or an ALSWH/45-and-Up linkage study"}
+];
+
+/* ══ State ═════════════════════════════════════════════════════ */
+const DEFAULT_STATE = {
+  age:51, stage:"Late perimenopause",
+  symptoms:["Cognitive fog","Memory problems","Depression","Sleep disturbance","Difficulty concentrating at work"],
+  hasKp:true, sampleType:"serum", trp:67.26, kyn:2.43,
+  riskFactors:[], hasMri:false, cmb:0, wmh:false, siderosis:false, apoe:"Unknown", useAu:true,
+  uptake:2.0, popAf:3.0, subAf:null, subN:50000, tab:"kp"
+};
+let S = Object.assign({}, DEFAULT_STATE, {symptoms:DEFAULT_STATE.symptoms.slice(), riskFactors:[]});
+
+/* ══ Scoring — ported verbatim from Menopause_KP_CDST.py ═══════ */
+const ageAdjust = (age, baseMean, beta) => baseMean + beta * (age - 47.35);
+const zScore = (v, mean, sd) => sd === 0 ? 0 : (v - mean) / sd;
+const r2 = n => Math.round(n * 100) / 100;
+const r4 = n => Math.round(n * 10000) / 10000;
+
+function kpRiskScore(trp, kyn, sampleType, useAu, age){
+  const norms = useAu ? NORM_AU : NORM;
+  const tK = sampleType + "_trp", kK = sampleType + "_kyn";
+  const adjTrp = ageAdjust(age, norms[tK].mean, AGE_EFFECTS[tK].beta);
+  const adjKyn = ageAdjust(age, norms[kK].mean, AGE_EFFECTS[kK].beta);
+  const trpZ = zScore(trp, adjTrp, norms[tK].sd);
+  const kynZ = zScore(kyn, adjKyn, norms[kK].sd);
+  const kynTrp = trp > 0 ? kyn / trp : 0;
+  const normKynTrp = adjTrp > 0 ? adjKyn / adjTrp : norms[kK].mean / norms[tK].mean;
+  const kynTrpZ = (kynTrp - normKynTrp) / (normKynTrp * 0.25);
+  const composite = (-trpZ + kynZ + kynTrpZ) / 3;
+
+  let level, tone, interpretation;
+  if (composite > 1.5){ level="HIGH"; tone="crit";
+    interpretation="Significant KP dysregulation. Elevated neurotoxic shift. Consider intervention."; }
+  else if (composite > 0.5){ level="MODERATE"; tone="warn";
+    interpretation="Moderate KP activation. Monitor and consider targeted intervention if symptomatic."; }
+  else if (composite > -0.5){ level="LOW-MODERATE"; tone="mild";
+    interpretation="Mild KP changes consistent with normal perimenopause transition."; }
+  else { level="LOW"; tone="ok";
+    interpretation="KP within normal range. Standard menopause management recommended."; }
+
+  return {trpZ:r2(trpZ), kynZ:r2(kynZ), kynTrp:r4(kynTrp), kynTrpZ:r2(kynTrpZ), composite:r2(composite),
+          level, tone, interpretation, adjTrp:r2(adjTrp), adjKyn:r2(adjKyn), normKynTrp:r4(normKynTrp),
+          popTrp:norms[tK].mean, popKyn:norms[kK].mean};
+}
+
+function recommendTreatment(kp, symptoms, age, stage){
+  const scores = {};
+  for (const name of Object.keys(TREATMENTS)){
+    let score = 50;
+    if (kp.level === "HIGH"){
+      if (name === "iTBS") score += 30;
+      else if (name === "MHT (HRT)") score += 20;
+      else if (name === "Monitoring Only") score -= 20;
+    } else if (kp.level === "MODERATE"){
+      if (name === "MHT (HRT)") score += 20;
+      else if (name === "iTBS") score += 10;
+    } else if (kp.level === "LOW"){
+      if (name === "Monitoring Only") score += 20;
+      else if (name === "iTBS") score -= 15;
+    }
+    if (symptoms.includes("Cognitive fog")){
+      if (name === "iTBS") score += 15;
+      else if (name === "SSRI/SNRI") score -= 10;
+    }
+    if (symptoms.includes("Depression")){
+      if (name === "SSRI/SNRI" || name === "CBT (Better Access)") score += 15;
+      if (name === "iTBS") score += 10;
+    }
+    if (symptoms.includes("Anxiety")){
+      if (name === "SSRI/SNRI" || name === "CBT (Better Access)") score += 10;
+    }
+    if (symptoms.includes("Hot flushes/VMS")){
+      if (name === "MHT (HRT)") score += 25;
+    }
+    if (symptoms.includes("Sleep disturbance")){
+      if (name === "MHT (HRT)") score += 10;
+      if (name === "CBT (Better Access)") score += 5;
+    }
+    if (stage === "Late perimenopause"){
+      if (name === "MHT (HRT)") score += 10;
+    } else if (stage === "Early postmenopause (<5yr)"){
+      if (name === "MHT (HRT)") score += 5;
+    } else if (stage === "Late postmenopause (>5yr)"){
+      if (name === "MHT (HRT)") score -= 15;
+      if (name === "Monitoring Only") score += 10;
+    }
+    if (age > 55 && name === "Monitoring Only") score += 5;
+    scores[name] = Math.max(0, Math.min(100, score));
+  }
+  const ranked = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+  return {ranked, scores};
+}
+
+function efficacyAssumptions(kp, hasKp){
+  return {
+    "iTBS": (hasKp && (kp.level === "HIGH" || kp.level === "MODERATE")) ? 0.22 : 0.12,
+    "MHT (HRT)":0.15, "SSRI/SNRI":0.10, "CBT (Better Access)":0.08, "Monitoring Only":0.03
+  };
+}
+
+function dementiaAssessment(kp, hasKp, symptoms, riskFactors, hasMri, cmb, wmh, siderosis, apoe){
+  let classical = 0, aria = 0;
+  const items = [];
+  if (riskFactors.includes("Bilateral oophorectomy")){ classical += 3;
+    items.push(["Bilateral oophorectomy &lt; menopause","HR = 1.46","Rocca 2007","+3"]); }
+  if (riskFactors.includes("Early/surgical menopause (<45)")){ classical += 3;
+    items.push(["Early menopause (&lt;45)","aOR = 2.21 for MCI","Rocca 2021","+3"]); }
+  if (riskFactors.includes("Family history of dementia")){ classical += 2;
+    items.push(["Family history","OR ~2.0","Literature","+2"]); }
+  if (riskFactors.includes("No current MHT use")){ classical += 1;
+    items.push(["No MHT during critical window","~30% risk reduction missed","Maki 2013","+1"]); }
+  if (hasKp && kp.level === "HIGH"){ classical += 2;
+    items.push(["KP dysregulation (HIGH)","Neurotoxic shift","Metri 2023 + Giil 2016","+2"]); }
+  else if (hasKp && kp.level === "MODERATE"){ classical += 1;
+    items.push(["KP activation (MODERATE)","Elevated KYN/TRP","Metri 2023","+1"]); }
+  if (symptoms.includes("Cognitive fog") || symptoms.includes("Memory problems")){ classical += 1;
+    items.push(["Current cognitive symptoms","Subjective","Self-report","+1"]); }
+
+  if (hasMri){
+    if (cmb >= 5){ aria += 3; items.push(["Cerebral microbleeds (≥5)", cmb + " CMBs on MRI","ARIA-H literature","+3"]); }
+    else if (cmb >= 1){ aria += 2; items.push(["Cerebral microbleeds (1–4)", cmb + " CMBs on MRI","ARIA-H literature","+2"]); }
+    if (wmh){ aria += 2; items.push(["WMH (Fazekas 2–3)","BBB compromise marker","Cerebrovascular lit.","+2"]); }
+    if (siderosis){ aria += 3; items.push(["Superficial siderosis","CAA marker — high BBB vulnerability","ARIA-H literature","+3"]); }
+  }
+  if (apoe === "Homozygous (e4/e4)"){ aria += 3; items.push(["APOE ε4/ε4 homozygous","OR ~12 for AD; BBB permeability","Literature","+3"]); }
+  else if (apoe === "Heterozygous (e3/e4)"){ aria += 2; items.push(["APOE ε3/ε4 heterozygous","OR ~3.2 for AD","Literature","+2"]); }
+
+  const total = classical + aria;
+  let nvLevel, nvTone;
+  if (aria >= 5){ nvLevel="HIGH"; nvTone="crit"; }
+  else if (aria >= 2){ nvLevel="MODERATE"; nvTone="warn"; }
+  else { nvLevel="LOW"; nvTone="ok"; }
+
+  let riskLevel, riskTone;
+  if (total >= 10){ riskLevel="CRITICAL"; riskTone="crit"; }
+  else if (total >= 6){ riskLevel="ELEVATED"; riskTone="crit"; }
+  else if (total >= 3){ riskLevel="MODERATE"; riskTone="warn"; }
+  else { riskLevel="POPULATION-LEVEL"; riskTone="ok"; }
+
+  return {classical, aria, total, items, nvLevel, nvTone, riskLevel, riskTone};
+}
+
+/* ══ Formatting helpers ════════════════════════════════════════ */
+const money = n => "$" + Math.round(n).toLocaleString("en-AU");
+const signed = n => (n >= 0 ? "+" : "") + n.toFixed(2);
+const pct = n => Math.round(n * 100) + "%";
+const esc = s => String(s).replace(/&(?![a-z]+;|#\d+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+/* ══ Charts (hand-drawn SVG, theme-token coloured) ═════════════ */
+function zBarChart(kp){
+  const labels = ["TRP (inverted)","KYN","KYN/TRP ratio"];
+  const values = [-kp.trpZ, kp.kynZ, kp.kynTrpZ];
+  const W = 620, H = 250, padL = 46, padR = 16, padT = 18, padB = 44;
+  const maxAbs = Math.max(1.6, ...values.map(v => Math.abs(v)) ) * 1.15;
+  const y = v => padT + (maxAbs - v) / (2 * maxAbs) * (H - padT - padB);
+  const bw = (W - padL - padR) / values.length * 0.44;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="KP biomarker z-scores against the normative range">`;
+  for (const t of [-1, 0, 1]){
+    if (Math.abs(t) > maxAbs) continue;
+    s += `<line class="grid-line" x1="${padL}" y1="${y(t)}" x2="${W-padR}" y2="${y(t)}"/>`;
+    s += `<text class="tick" x="${padL-8}" y="${y(t)+4}" text-anchor="end">${t}</text>`;
+  }
+  s += `<line class="zero-line" x1="${padL}" y1="${y(0)}" x2="${W-padR}" y2="${y(0)}"/>`;
+  if (maxAbs > 1) s += `<line class="thresh-line" x1="${padL}" y1="${y(1)}" x2="${W-padR}" y2="${y(1)}"/>
+    <text x="${W-padR}" y="${y(1)-6}" text-anchor="end" style="fill:var(--crit);font-size:10.5px">Risk threshold (+1 SD)</text>`;
+  values.forEach((v, i) => {
+    const cx = padL + (W - padL - padR) * (i + 0.5) / values.length;
+    const tone = v > 1 ? "var(--crit)" : v > 0.5 ? "var(--warn)" : "var(--ok)";
+    const top = v >= 0 ? y(v) : y(0), h = Math.max(1, Math.abs(y(v) - y(0)));
+    s += `<rect x="${cx - bw/2}" y="${top}" width="${bw}" height="${h}" rx="1" style="fill:${tone}"/>`;
+    s += `<text class="bar-lab" x="${cx}" y="${v >= 0 ? y(v) - 8 : y(v) + 16}" text-anchor="middle">z = ${v.toFixed(2)}</text>`;
+    s += `<text class="tick" x="${cx}" y="${H - padB + 20}" text-anchor="middle">${labels[i]}</text>`;
+  });
+  s += `<text class="axis-title" x="${padL}" y="${H-6}">Z-score — deviation from age-adjusted normative mean</text>`;
+  return s + `</svg>`;
+}
+
+function trajectoryChart(age, useAu){
+  const norms = useAu ? NORM_AU : NORM;
+  const ages = []; for (let a = 40; a <= 65; a++) ages.push(a);
+  const vals = ages.map(a => ageAdjust(a, norms.serum_trp.mean, AGE_EFFECTS.serum_trp.beta));
+  const W = 620, H = 230, padL = 50, padR = 18, padT = 16, padB = 42;
+  const vMin = Math.min(...vals) - 1.5, vMax = Math.max(...vals) + 1.5;
+  const x = a => padL + (a - 40) / 25 * (W - padL - padR);
+  const y = v => padT + (vMax - v) / (vMax - vMin) * (H - padT - padB);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Expected serum tryptophan trajectory with age">`;
+  for (let i = 0; i <= 3; i++){
+    const v = vMin + (vMax - vMin) * i / 3;
+    s += `<line class="grid-line" x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}"/>`;
+    s += `<text class="tick" x="${padL-8}" y="${y(v)+4}" text-anchor="end">${v.toFixed(0)}</text>`;
+  }
+  s += `<polyline fill="none" style="stroke:var(--tx-mht)" stroke-width="2.5" points="${ages.map((a,i)=>x(a)+","+y(vals[i])).join(" ")}"/>`;
+  s += `<line class="thresh-line" x1="${x(age)}" y1="${padT}" x2="${x(age)}" y2="${H-padB}"/>`;
+  s += `<circle cx="${x(age)}" cy="${y(ageAdjust(age, norms.serum_trp.mean, AGE_EFFECTS.serum_trp.beta))}" r="4.5" style="fill:var(--crit)"/>`;
+  s += `<text x="${x(age)}" y="${padT-3}" text-anchor="middle" style="fill:var(--crit);font-size:10.5px">Patient age ${age}</text>`;
+  for (const a of [40,45,50,55,60,65]) s += `<text class="tick" x="${x(a)}" y="${H-padB+18}" text-anchor="middle">${a}</text>`;
+  s += `<text class="axis-title" x="${padL}" y="${H-6}">Expected serum TRP (µM) — Metri 2023 age regression</text>`;
+  return s + `</svg>`;
+}
+
+function radarChart(top3){
+  const cats = ["Mood","Cognition","VMS","Cost-eff.","Access","Safety"];
+  const keys = ["mood","cognition","vms","cost_eff","access","safety"];
+  const W = 460, H = 380, cx = W/2, cy = H/2 + 6, R = 118;
+  const ang = i => -Math.PI/2 + i * 2*Math.PI/6;
+  const pt = (i, v) => [cx + Math.cos(ang(i)) * R * v/10, cy + Math.sin(ang(i)) * R * v/10];
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evidence profile radar for the top three treatments">`;
+  for (const ring of [2.5, 5, 7.5, 10]){
+    const pts = cats.map((_, i) => pt(i, ring).join(",")).join(" ");
+    s += `<polygon points="${pts}" fill="none" class="grid-line"/>`;
+  }
+  cats.forEach((c, i) => {
+    const [ex, ey] = pt(i, 10);
+    s += `<line class="grid-line" x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}"/>`;
+    const [lx, ly] = pt(i, 12.3);
+    const anchor = Math.abs(lx - cx) < 4 ? "middle" : lx > cx ? "start" : "end";
+    s += `<text class="tick" x="${lx}" y="${ly + 4}" text-anchor="${anchor}" style="fill:var(--ink-2)">${c}</text>`;
+  });
+  top3.forEach(name => {
+    const ev = TX_EVIDENCE[name];
+    const pts = keys.map((k, i) => pt(i, ev[k]).join(",")).join(" ");
+    s += `<polygon points="${pts}" style="fill:${TREATMENTS[name].color};stroke:${TREATMENTS[name].color}" fill-opacity="0.16" stroke-width="2"/>`;
+  });
+  s += `</svg><div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:4px;font-size:12.5px">`;
+  top3.forEach(name => {
+    s += `<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:2px;background:${TREATMENTS[name].color};display:inline-block"></span>${esc(name)}</span>`;
+  });
+  return s + `</div>`;
+}
+
+function groupedCostChart(rows){
+  const W = 660, H = 300, padL = 58, padR = 14, padT = 16, padB = 62;
+  const maxV = Math.max(...rows.map(r => Math.max(r.cost, r.offset))) * 1.12;
+  const y = v => padT + (1 - v / maxV) * (H - padT - padB);
+  const slot = (W - padL - padR) / rows.length;
+  const bw = slot * 0.3;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Annual treatment cost against modelled productivity offset">`;
+  for (let i = 0; i <= 4; i++){
+    const v = maxV * i / 4;
+    s += `<line class="grid-line" x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}"/>`;
+    s += `<text class="tick" x="${padL-8}" y="${y(v)+4}" text-anchor="end">${v >= 1000 ? (v/1000).toFixed(0)+"k" : v.toFixed(0)}</text>`;
+  }
+  rows.forEach((r, i) => {
+    const cx = padL + slot * (i + 0.5);
+    s += `<rect x="${cx - bw - 2}" y="${y(r.cost)}" width="${bw}" height="${Math.max(1, y(0)-y(r.cost))}" rx="1" style="fill:var(--crit)"/>`;
+    s += `<rect x="${cx + 2}" y="${y(r.offset)}" width="${bw}" height="${Math.max(1, y(0)-y(r.offset))}" rx="1" style="fill:var(--ok)"/>`;
+    const words = r.name.split(" ");
+    s += `<text class="tick" x="${cx}" y="${H - padB + 18}" text-anchor="middle">${esc(words[0])}</text>`;
+    if (words.length > 1) s += `<text class="tick" x="${cx}" y="${H - padB + 31}" text-anchor="middle">${esc(words.slice(1).join(" "))}</text>`;
+  });
+  s += `<text class="axis-title" x="${padL}" y="${H-6}">AUD per year</text></svg>`;
+  s += `<div style="display:flex;gap:16px;justify-content:center;margin-top:2px;font-size:12.5px">
+    <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:2px;background:var(--crit);display:inline-block"></span>Treatment cost</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:2px;background:var(--ok);display:inline-block"></span>Productivity offset</span></div>`;
+  return s;
+}
+
+function strombergChart(){
+  const W = 660, H = 280, padL = 54, padR = 14, padT = 18, padB = 74;
+  const maxV = Math.max(...STROMBERG.map(b => b.aud)) * 1.15;
+  const y = v => padT + (1 - v / maxV) * (H - padT - padB);
+  const slot = (W - padL - padR) / STROMBERG.length, bw = slot * 0.5;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Stromberg decomposition of annual productivity loss">`;
+  for (let i = 0; i <= 4; i++){
+    const v = maxV * i / 4;
+    s += `<line class="grid-line" x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}"/>`;
+    s += `<text class="tick" x="${padL-8}" y="${y(v)+4}" text-anchor="end">${(v/1000).toFixed(0)}k</text>`;
+  }
+  STROMBERG.forEach((b, i) => {
+    const cx = padL + slot * (i + 0.5);
+    const col = b.type === "Employee" ? "var(--tx-mht)" : "var(--tx-ssri)";
+    s += `<rect x="${cx - bw/2}" y="${y(b.aud)}" width="${bw}" height="${Math.max(1, y(0)-y(b.aud))}" rx="1" style="fill:${col}"/>`;
+    s += `<text class="bar-lab" x="${cx}" y="${y(b.aud) - 7}" text-anchor="middle">${money(b.aud)}</text>`;
+    s += `<text class="tick" x="${cx}" y="${H - padB + 18}" text-anchor="middle">${i+1}</text>`;
+  });
+  s += `<text class="axis-title" x="${padL}" y="${H-40}">AUD/yr per symptomatic employed woman</text></svg>`;
+  s += `<div style="font-size:12px;color:var(--ink-3);margin-top:2px">
+    <span style="color:var(--tx-mht);font-weight:600">Blue</span> = employee-side ·
+    <span style="color:var(--tx-ssri);font-weight:600">Orange</span> = employer-side.
+    WEP is computed from employer-side values only (0.72 × [Employer_A + Employer_P]).</div>`;
+  return s;
+}
+
+/* ══ Renderers ═════════════════════════════════════════════════ */
+function renderSummary(kp){
+  const el = document.getElementById("summary-strip");
+  el.innerHTML = `
+    <div><div class="s-lab">Age</div><div class="s-val">${S.age} <span style="font-size:14px;color:var(--ink-3)">years</span></div></div>
+    <div><div class="s-lab">Stage</div><div class="s-val sm">${esc(S.stage.split("(")[0].trim())}</div></div>
+    <div><div class="s-lab">Symptoms</div><div class="s-val">${S.symptoms.length}</div></div>
+    <div><div class="s-lab">Risk factors</div><div class="s-val">${S.riskFactors.length}</div></div>
+    <div><div class="s-lab">KP risk</div><div class="s-val sm">${S.hasKp
+      ? `<span class="pill ${kp.tone}">${kp.level}</span>`
+      : `<span class="pill mut">No bloods</span>`}</div></div>`;
+}
+
+function renderKpTab(kp){
+  const norms = S.useAu ? NORM_AU : NORM;
+  const ref = S.useAu ? "Australian" : "Global";
+  const tK = S.sampleType + "_trp", kK = S.sampleType + "_kyn";
+  let h = `<div class="tab-head"><h3>Kynurenine Pathway Risk Assessment</h3>
+    <p>Patient values scored against Metri et al. (2023) normative ranges, age-adjusted by the published regression</p></div>`;
+
+  if (S.hasKp){
+    const dir = kp.kynTrp > kp.normKynTrp ? "↑" : "↓";
+    h += `<div class="card">
+      <div class="grid-3">
+        <div class="metric"><div class="m-lab">KP risk level</div>
+          <div class="m-val"><span class="pill ${kp.tone}" style="font-size:15px;padding:5px 14px">${kp.level}</span></div>
+          <div class="m-sub">composite of TRP, KYN and ratio z</div></div>
+        <div class="metric"><div class="m-lab">KYN/TRP ratio</div>
+          <div class="m-val num">${kp.kynTrp.toFixed(4)}</div>
+          <div class="m-sub">${dir} vs age-adj norm ${kp.normKynTrp.toFixed(4)}</div></div>
+        <div class="metric"><div class="m-lab">Composite score</div>
+          <div class="m-val num">${kp.composite.toFixed(2)}</div>
+          <div class="m-sub">&gt;1.5 HIGH · 0.5–1.5 MOD · &gt;−0.5 LOW-MOD</div></div>
+      </div>
+      <div class="note"><b>Interpretation:</b> ${esc(kp.interpretation)}</div>
+    </div>
+
+    <div class="card"><h4>KP biomarker profile vs normative range</h4>
+      <p class="cap">TRP is inverted so that, on every bar, higher means more risk</p>
+      ${zBarChart(kp)}
+    </div>
+
+    <div class="card"><h4>Normative comparison — age-adjusted to ${S.age}</h4>
+      <p class="cap">${ref} reference, ${S.sampleType}. Age adjustment: TRP β = ${AGE_EFFECTS[tK].beta}/yr, KYN β = ${AGE_EFFECTS[kK].beta}/yr, centred at study mean age 47.35yr (Metri 2023)</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Metabolite</th><th class="n">Patient</th><th class="n">Age-adj mean</th><th class="n">${ref} mean</th><th class="n">Z-score</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Tryptophan (TRP)</td><td class="n">${S.trp.toFixed(1)} µM</td><td class="n">${kp.adjTrp.toFixed(2)} µM</td>
+            <td class="n">${norms[tK].mean.toFixed(2)} µM</td><td class="n">${signed(kp.trpZ)}</td>
+            <td>${kp.trpZ < -1 ? '<span class="pill crit">Low</span>' : Math.abs(kp.trpZ) < 1 ? '<span class="pill ok">Normal</span>' : '<span class="pill mild">High</span>'}</td></tr>
+          <tr><td>Kynurenine (KYN)</td><td class="n">${S.kyn.toFixed(2)} µM</td><td class="n">${kp.adjKyn.toFixed(2)} µM</td>
+            <td class="n">${norms[kK].mean.toFixed(2)} µM</td><td class="n">${signed(kp.kynZ)}</td>
+            <td>${kp.kynZ > 1 ? '<span class="pill crit">High</span>' : Math.abs(kp.kynZ) < 1 ? '<span class="pill ok">Normal</span>' : '<span class="pill mild">Low</span>'}</td></tr>
+          <tr><td>KYN/TRP ratio</td><td class="n">${kp.kynTrp.toFixed(4)}</td><td class="n">${kp.normKynTrp.toFixed(4)}</td>
+            <td class="n">${(norms[kK].mean / norms[tK].mean).toFixed(4)}</td><td class="n">${signed(kp.kynTrpZ)}</td>
+            <td>${kp.kynTrpZ > 1 ? '<span class="pill crit">Elevated</span>' : Math.abs(kp.kynTrpZ) < 1 ? '<span class="pill ok">Normal</span>' : '<span class="pill mild">Low</span>'}</td></tr>
+        </tbody>
+      </table></div>
+    </div>`;
+  } else {
+    h += `<div class="card">
+      <div class="note warn"><b>No KP biomarker data entered.</b> This assessment runs on symptoms and demographics only.</div>
+      <div style="margin-top:14px;font-size:13.5px;color:var(--ink-2)">
+        <b style="color:var(--ink)">To sharpen it:</b>
+        <ul style="margin:6px 0 0;padding-left:18px">
+          <li>Order serum TRP and KYN — standard HPLC at any pathology lab, about $80 AUD</li>
+          <li>Results score against Metri et al. (2023) normative ranges</li>
+          <li>KP-guided selection cuts cost per responder by 61%</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card"><h4>Expected serum TRP trajectory with age</h4>
+      <p class="cap">Metri 2023 regression, ${ref.toLowerCase()} reference — where this patient sits without bloods</p>
+      ${trajectoryChart(S.age, S.useAu)}
+    </div>`;
+  }
+
+  const cog = S.symptoms.filter(s => ["Cognitive fog","Memory problems","Difficulty concentrating at work"].includes(s));
+  const mood = S.symptoms.filter(s => ["Depression","Anxiety"].includes(s));
+  const phys = S.symptoms.filter(s => !cog.includes(s) && !mood.includes(s));
+  const col = (title, arr) => `<div><div class="s-lab">${title}</div>${
+    arr.length ? `<ul style="margin:6px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-2)">${arr.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`
+               : `<p style="margin:6px 0 0;font-size:13px;color:var(--ink-3)">None reported</p>`}</div>`;
+  h += `<div class="card"><h4>Symptom profile</h4><p class="cap">Grouped by domain — cognitive symptoms drive the iTBS weighting</p>
+    <div class="grid-3">${col("Cognitive", cog)}${col("Mood", mood)}${col("Physical", phys)}</div></div>`;
+
+  document.getElementById("p-kp").innerHTML = h;
+}
+
+function renderTxTab(kp, rec){
+  const {ranked} = rec;
+  let h = `<div class="tab-head"><h3>Treatment Pathway Recommendation</h3>
+    <p>Ranked by clinical suitability — KP profile, symptom constellation, menopausal stage and age</p></div>`;
+
+  h += `<div class="card"><h4>Suitability ranking</h4><p class="cap">Score out of 100; base score 50, adjusted by profile</p>`;
+  ranked.forEach(([name, score], i) => {
+    h += `<div class="rank-row${i===0?" first":""}">
+      <div class="rank-n">${i+1}</div>
+      <div>
+        <div class="rank-bar-head"><b>${esc(name)}</b><span class="num" style="color:var(--ink-3)">${score}/100</span></div>
+        <div class="rank-track"><div class="rank-fill" style="width:${score}%;background:${TREATMENTS[name].color}"></div></div>
+      </div></div>`;
+  });
+  h += `</div>`;
+
+  h += `<div class="card"><h4>Option detail</h4><p class="cap">Annual cost, rebate and out-of-pocket in AUD; evidence graded mood / cognition</p>`;
+  ranked.forEach(([name, score], i) => {
+    const tx = TREATMENTS[name];
+    h += `<details class="tx"${i===0?" open":""}>
+      <summary><span>${esc(name)} — <span style="font-weight:400;color:var(--ink-3)">${esc(tx.label)}</span></span><span class="sc">${score}/100</span></summary>
+      <div class="tx-body">
+        <div class="tx-metrics">
+          <div class="metric"><div class="m-lab">Annual cost</div><div class="m-val num" style="font-size:20px">${money(tx.annual_cost)}</div></div>
+          <div class="metric"><div class="m-lab">MBS rebate</div><div class="m-val num" style="font-size:20px">${money(tx.mbs_rebate)}</div></div>
+          <div class="metric"><div class="m-lab">Patient OOP</div><div class="m-val num" style="font-size:20px">${money(tx.oop)}</div></div>
+          <div class="metric"><div class="m-lab">Evidence mood / cog</div><div class="m-val num" style="font-size:20px">${tx.evidence_mood} / ${tx.evidence_cog}</div></div>
+        </div>
+        <p class="tx-desc">${esc(tx.desc)}</p>
+      </div></details>`;
+  });
+  h += `</div>`;
+
+  h += `<div class="card"><h4>Evidence profile comparison</h4>
+    <p class="cap">Top three options, scored 0–10 — higher means stronger evidence or better performance in that domain</p>
+    ${radarChart(ranked.slice(0,3).map(r => r[0]))}</div>`;
+
+  if (ranked[0][0] === "iTBS"){
+    h += `<div class="note"><b>Note:</b> iTBS ranks first on this patient's KP profile. The MenoStim trial
+      (Metri PhD, NICM HRI/WSU) is the FIRST to test iTBS for menopausal cognitive symptoms — efficacy is
+      <b>not yet established</b>.</div>`;
+  }
+  document.getElementById("p-tx").innerHTML = h;
+}
+
+function renderCostTab(kp, rec){
+  const eff = efficacyAssumptions(kp, S.hasKp);
+  const rows = Object.entries(TREATMENTS).map(([name, tx]) => {
+    const e = eff[name];
+    const offset = Math.round(PER_WOMAN_INDIRECT * e);
+    return {name, cost:tx.annual_cost, eff:e, offset, net:tx.annual_cost - offset,
+            be: offset > 0 ? Math.round(tx.annual_cost / offset * 10) / 10 : Infinity};
+  });
+
+  let h = `<div class="tab-head"><h3>Per-Patient Cost-Offset Analysis</h3>
+    <p>Treatment cost against modelled productivity recovery, per symptomatic employed woman</p></div>`;
+
+  h += `<div class="card">
+    <div class="metric"><div class="m-lab">Annual productivity loss, Stromberg-adjusted</div>
+      <div class="m-val num">${money(PER_WOMAN_INDIRECT)} <span style="font-size:14px;color:var(--ink-3)">AUD</span></div>
+      <div class="m-sub">Stromberg et al. (2017), applied per Tewhaiti-Smith, Gannott et al. (2025)</div></div>
+    <details class="about" style="margin-top:14px">
+      <summary>Stromberg decomposition — five buckets</summary>
+      <div style="padding:0 14px 14px">${strombergChart()}</div>
+    </details>
+  </div>`;
+
+  h += `<div class="card"><h4>Treatment cost vs productivity offset</h4>
+    <p class="cap">Efficacy assumptions are modelled, not measured${S.hasKp && (kp.level==="HIGH"||kp.level==="MODERATE") ? " — iTBS uses the KP-selected 22% assumption (NNT = 3)" : " — iTBS uses the unselected 12% assumption (NNT = 8)"}</p>
+    ${groupedCostChart(rows)}
+    <div class="tablewrap"><table>
+      <thead><tr><th>Treatment</th><th class="n">Annual cost</th><th class="n">Assumed efficacy</th><th class="n">Productivity offset</th><th class="n">Net annual</th><th class="n">Break-even (yrs)</th></tr></thead>
+      <tbody>${rows.map(r => `<tr>
+        <td>${esc(r.name)}</td><td class="n">${money(r.cost)}</td><td class="n">${pct(r.eff)}</td>
+        <td class="n">${money(r.offset)}</td>
+        <td class="n" style="color:${r.net > 0 ? "var(--crit)" : "var(--ok)"}">${r.net > 0 ? money(r.net) : "−" + money(Math.abs(r.net))}</td>
+        <td class="n">${isFinite(r.be) ? r.be.toFixed(1) : "—"}</td></tr>`).join("")}</tbody>
+    </table></div>`;
+  if (S.hasKp && (kp.level === "HIGH" || kp.level === "MODERATE")){
+    h += `<div class="note good"><b>KP-targeted iTBS:</b> with biomarker selection the assumed efficacy rises from 12% to 22%,
+      putting the offset at ${money(PER_WOMAN_INDIRECT * 0.22)}/yr against a ${money(TREATMENTS["iTBS"].annual_cost)} annual cost.</div>`;
+  }
+  h += `</div>`;
+
+  const top = rec.ranked[0][0];
+  const eligible = 360000;
+  const treated = Math.round(eligible * S.uptake / 100);
+  const natOffset = treated * Math.round(PER_WOMAN_INDIRECT * eff[top]);
+  const natCost = treated * TREATMENTS[top].annual_cost;
+  const natNet = natCost - natOffset;
+
+  h += `<div class="card"><h4>National scaling</h4>
+    <p class="cap">If ${esc(top)} — this patient's top-ranked option — were adopted across the eligible population (360,000)</p>
+    <label class="field" for="uptake" style="max-width:420px">
+      <span class="lab">Assumed uptake, % of eligible <span class="val">${S.uptake.toFixed(1)}%</span></span>
+      <input type="range" id="uptake" min="0.5" max="10" step="0.5" value="${S.uptake}">
+    </label>
+    <div class="grid-3" style="margin-top:14px">
+      <div class="metric"><div class="m-lab">Patients treated</div><div class="m-val num">${treated.toLocaleString("en-AU")}</div></div>
+      <div class="metric"><div class="m-lab">National offset</div><div class="m-val num">${money(natOffset)}</div>
+        <div class="m-sub">at ${pct(eff[top])} assumed efficacy</div></div>
+      <div class="metric"><div class="m-lab">Net budget impact</div>
+        <div class="m-val num" style="color:${natNet > 0 ? "var(--crit)" : "var(--ok)"}">${natNet > 0 ? money(natNet) : "−" + money(Math.abs(natNet))}</div>
+        <div class="m-sub">${natNet > 0 ? "net cost" : "net saving"}</div></div>
+    </div></div>`;
+
+  document.getElementById("p-cost").innerHTML = h;
+}
+
+function renderDementiaTab(kp, dem){
+  const defaultSubAf = dem.nvLevel === "HIGH" ? 20 : dem.nvLevel === "MODERATE" ? 12 : 5;
+  const subAf = S.subAf === null ? defaultSubAf : S.subAf;
+  const popN = 2500000;
+  const popAvoidable = Math.round(popN * (S.popAf/100) * DEMENTIA_LIFETIME_COST / 1e9 * 10) / 10;
+  const subAvoidable = Math.round(S.subN * (subAf/100) * DEMENTIA_LIFETIME_COST / 1e9 * 10) / 10;
+  const perPatient = Math.round((subAf/100) * DEMENTIA_LIFETIME_COST);
+
+  let h = `<div class="tab-head"><h3>Downstream Dementia Risk Assessment</h3>
+    <p>Exploratory — Rocca et al. (2007, 2021) + Metri et al. (2023) + ARIA-H neurovascular risk</p></div>`;
+
+  h += `<div class="card">
+    <div class="grid-3">
+      <div class="metric"><div class="m-lab">Classical risk</div><div class="m-val num">${dem.classical}<span style="font-size:15px;color:var(--ink-3)">/12</span></div></div>
+      <div class="metric"><div class="m-lab">ARIA-H / neurovascular</div><div class="m-val num">${dem.aria}<span style="font-size:15px;color:var(--ink-3)">/11</span></div>
+        <div class="m-sub">vulnerability: ${dem.nvLevel}</div></div>
+      <div class="metric"><div class="m-lab">Combined score</div><div class="m-val num">${dem.total}<span style="font-size:15px;color:var(--ink-3)">/23</span></div></div>
+      <div class="metric"><div class="m-lab">Risk level</div><div class="m-val"><span class="pill ${dem.riskTone}" style="font-size:15px;padding:5px 14px">${dem.riskLevel}</span></div></div>
+    </div>`;
+  if (dem.items.length){
+    h += `<div class="tablewrap"><table>
+      <thead><tr><th>Contributing factor</th><th>Effect size</th><th>Source</th><th class="n">Points</th></tr></thead>
+      <tbody>${dem.items.map(it => `<tr><td>${it[0]}</td><td>${esc(it[1])}</td><td style="color:var(--ink-3)">${esc(it[2])}</td><td class="n">${it[3]}</td></tr>`).join("")}</tbody>
+    </table></div>`;
+  } else {
+    h += `<div class="note">No scored risk factors. Add risk factors, MRI findings or APOE status in the patient panel.</div>`;
+  }
+  h += `</div>`;
+
+  h += `<div class="card"><h4>The triple-hit model</h4>
+    <p class="cap">Why menopause + KP dysregulation + neurovascular vulnerability compounds into accelerated neurodegeneration</p>
+    <div class="grid-3" style="gap:18px">
+      <div><div class="s-lab" style="color:var(--ok)">Hit 1 — Estrogen withdrawal</div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:6px 0 0">The BBB becomes more permeable at menopause (Bake &amp; Segal 2007). Estrogen normally maintains tight junctions and limits neuroinflammatory infiltration; its loss recapitulates an aged BBB phenotype.</p></div>
+      <div><div class="s-lab" style="color:var(--warn)">Hit 2 — KP dysregulation</div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:6px 0 0">Elevated circulating kynurenine crosses the BBB via the L-system transporter. Microglia convert KYN → quinolinic acid, an NMDA agonist and excitotoxin. Metri et al. (2023) showed the steepest TRP/KYN shift lands at menopause.</p></div>
+      <div><div class="s-lab" style="color:var(--crit)">Hit 3 — ARIA-H vulnerability</div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:6px 0 0">Microbleeds, WMH and superficial siderosis indicate pre-existing BBB compromise, and APOE ε4 carriers have leakier vessels. Here KYN flux into the brain is amplified and QUIN excitotoxicity compounded.</p></div>
+    </div>
+    <div class="note"><b>The intersection of all three hits</b> defines the highest-risk, most cost-effective population to intervene in.</div>
+  </div>`;
+
+  const funnel = [
+    {lab:"All perimenopausal women", n:2500000, col:"var(--ok)"},
+    {lab:"Symptomatic — cognitive/mood", n:1400000, col:"var(--mild)"},
+    {lab:"KP-dysregulated (~30%)", n:420000, col:"var(--warn)"},
+    {lab:"ARIA-H positive (~12%)", n:50000, col:"var(--crit)"},
+    {lab:"KP + ARIA-H overlap", n:30000, col:"var(--crit)"}
+  ];
+  h += `<div class="card"><h4>Precision medicine funnel</h4>
+    <p class="cap">Population to screenable high-risk subgroup — bar width is proportional to cohort size</p>
+    <div class="funnel">${funnel.map(f => `
+      <div class="funnel-row">
+        <div class="funnel-bar" style="background:${f.col};width:${Math.max(14, f.n / 2500000 * 100)}%;${f.n < 200000 ? "opacity:.95" : ""}">${(f.n/1000).toFixed(0)}K</div>
+        <div class="funnel-lab">${esc(f.lab)}</div>
+      </div>`).join("")}</div></div>`;
+
+  h += `<div class="card"><h4>Dementia cost avoidance model</h4>
+    <p class="cap">Precision targeting converts a speculative population estimate into defensible subgroup economics — lifetime cost per case ${money(DEMENTIA_LIFETIME_COST)} (NATSEM)</p>
+    <div class="grid-2">
+      <div>
+        <div class="s-lab">Population-level estimate</div>
+        <label class="field" for="pop-af" style="margin-top:10px">
+          <span class="lab">Population AF <span class="val">${S.popAf.toFixed(1)}%</span></span>
+          <input type="range" id="pop-af" min="1" max="10" step="0.5" value="${S.popAf}">
+          <span class="hint">Menopause-attributable fraction for dementia — no published estimate exists (GAP).</span>
+        </label>
+        <div class="metric" style="margin-top:10px"><div class="m-lab">Population</div><div class="m-val num">${popN.toLocaleString("en-AU")}</div></div>
+        <div class="metric" style="margin-top:10px"><div class="m-lab">Avoidable lifetime cost</div>
+          <div class="m-val num">$${popAvoidable.toFixed(1)}B</div>
+          <div class="m-sub">source quality: D — GAP, no published data</div></div>
+      </div>
+      <div>
+        <div class="s-lab">Precision subgroup — ARIA-H + KP-targeted</div>
+        <label class="field" for="sub-af" style="margin-top:10px">
+          <span class="lab">Subgroup AF <span class="val">${subAf.toFixed(0)}%</span></span>
+          <input type="range" id="sub-af" min="5" max="40" step="1" value="${subAf}">
+          <span class="hint">A higher AF is defensible in a defined high-risk subgroup (Rocca HRs in surgical menopause). Default tracks neurovascular level: ${dem.nvLevel}.</span>
+        </label>
+        <label class="field" for="sub-n">
+          <span class="lab">High-risk subgroup size <span class="val">${S.subN.toLocaleString("en-AU")}</span></span>
+          <input type="range" id="sub-n" min="15000" max="125000" step="5000" value="${S.subN}">
+        </label>
+        <div class="metric" style="margin-top:10px"><div class="m-lab">Avoidable lifetime cost</div>
+          <div class="m-val num">$${subAvoidable.toFixed(1)}B</div>
+          <div class="m-sub">source quality: C — defensible, screenable population</div></div>
+      </div>
+    </div>
+    <div class="note"><b>Per-patient intervention value:</b> at ${subAf.toFixed(0)}% AF, avoidable cost per patient is
+      <b>${money(perPatient)} AUD</b> against a treatment cost of $7,500/yr —
+      ${perPatient > 50000 ? "strongly cost-effective" : "cost-effective"} by any ICER threshold.</div>
+  </div>`;
+
+  h += `<div class="card"><h4>KP connection to neurodegeneration</h4>
+    <p class="cap">Metri et al. (2023) established the normative reference that makes this shift detectable</p>
+    <ul style="font-size:13.5px;color:var(--ink-2);padding-left:18px;margin:0">
+      <li><b>Tryptophan</b> is degraded via the KP → <b>kynurenine</b> → branch point</li>
+      <li>Neuroprotective branch → <b>kynurenic acid (KYNA)</b>, an NMDA antagonist</li>
+      <li>Neurotoxic branch → <b>3-HK</b> → <b>quinolinic acid (QUIN)</b>, an NMDA agonist and excitotoxin</li>
+      <li>With ageing and estrogen withdrawal the balance shifts toward <b>QUIN</b> (Giil et al. 2016)</li>
+      <li><b>ARIA-H markers mean the BBB is already compromised</b> — QUIN flux amplified</li>
+    </ul>
+    <div class="note">Intervention during the critical window — perimenopause — may modify this trajectory.</div>
+    <div class="note warn"><b>Exploratory.</b> Dementia risk scoring here is not validated and the triple-hit model is
+      hypothesis-generating. ARIA-H risk in KP-dysregulated perimenopausal women has never been studied — it is a
+      fundable research question (see Research Gaps). MenoStim can begin to answer it if MRI and KP bloods are collected.</div>
+  </div>`;
+
+  document.getElementById("p-dem").innerHTML = h;
+}
+
+function renderGapsTab(){
+  const tone = {CRITICAL:"crit", HIGH:"warn", MEDIUM:"mild"};
+  let h = `<div class="tab-head"><h3>Research Gaps &amp; Fundable Questions</h3>
+    <p>Where this research fills evidence gaps — and what remains open</p></div>
+    <div class="card"><p style="margin:0;font-size:13.5px;color:var(--ink-2)">Every <b>GAP</b> estimate in the COI/BIM model is a
+      fundable research question. The MenoStim trial (n = 72) can answer several directly; others need larger cohorts or
+      data linkage.</p></div>`;
+
+  RESEARCH_GAPS.forEach((g, i) => {
+    h += `<details class="gap-item"${i < 2 ? " open" : ""}>
+      <summary><span class="pill ${tone[g.priority]}">${g.priority}</span><span>${esc(g.gap)}</span></summary>
+      <div class="gap-body">
+        <div>
+          <span class="k">Current evidence</span>${esc(g.current)}
+          <div style="margin-top:10px"><span class="k">What it fills</span>${esc(g.fills)}</div>
+        </div>
+        <div>
+          <span class="k">Fundable study</span>${esc(g.fundable)}
+          <div style="margin-top:10px"><span class="k">Who can answer it</span>${esc(g.owner)}</div>
+        </div>
+      </div></details>`;
+  });
+
+  h += `<div class="card" style="margin-top:16px"><h4>The grant narrative</h4>
+    <p class="cap">NHMRC / MRFF application structure</p>
+    <ol style="font-size:13.5px;color:var(--ink-2);padding-left:20px;margin:0">
+      <li><b>Burden</b> — $41.9B AUD/yr national cost of menopausal cognitive &amp; mood symptoms (Gannott 2025, first published COI)</li>
+      <li><b>Mechanism</b> — KP dysregulation accelerates at menopause: lower TRP, rising KYN, neurotoxic shift (Metri et al. 2023; Giil et al. 2016)</li>
+      <li><b>Gap</b> — no validated intervention for menopausal cognitive symptoms; complementary therapy evidence is low/very low (Metri et al. 2026)</li>
+      <li><b>Intervention</b> — iTBS, first trial for this indication (MenoStim, Metri PhD)</li>
+      <li><b>Biomarker</b> — KP profiling enables targeted selection; cost per responder drops 61% with biomarker guidance</li>
+      <li><b>Translation</b> — the CDST algorithm converts the research into a clinical tool</li>
+      <li><b>Economic case</b> — the BIM shows KP-targeted iTBS is near cost-neutral within 5 years</li>
+    </ol>
+    <div class="note"><b>Key question for Phase III funding:</b> <i>Does iTBS in KP-dysregulated perimenopausal women modify
+      the kynurenine–neurodegeneration trajectory and reduce cognitive/mood symptom burden?</i> If MenoStim collects pre/post
+      KP biomarkers, the pilot alone can establish whether iTBS shifts the KYN/TRP ratio — the mechanistic proof needed for
+      a larger efficacy trial.</div>
+  </div>`;
+
+  document.getElementById("p-gaps").innerHTML = h;
+}
+
+function summaryLines(kp, rec, dem){
+  const eff = efficacyAssumptions(kp, S.hasKp);
+  const L = [];
+  L.push(`Patient: ${S.age}yo female, ${S.stage}`);
+  L.push(`Symptoms: ${S.symptoms.length ? S.symptoms.join(", ") : "None reported"}`);
+  L.push(`Risk Factors: ${S.riskFactors.length ? S.riskFactors.join(", ") : "None"}`);
+  if (S.hasKp){
+    L.push(`KP Biomarkers (${S.sampleType}): TRP ${S.trp.toFixed(1)} µM, KYN ${S.kyn.toFixed(2)} µM, KYN/TRP ${kp.kynTrp.toFixed(4)}`);
+    L.push(`KP Risk Level: ${kp.level} (composite z = ${kp.composite.toFixed(2)})`);
+    L.push(`Interpretation: ${kp.interpretation}`);
+  } else {
+    L.push("KP Biomarkers: Not available — recommend serum TRP/KYN ($80 AUD)");
+  }
+  L.push("");
+  L.push(`Recommended Treatment: ${rec.ranked[0][0]} (score ${rec.ranked[0][1]}/100)`);
+  L.push(`Alternative: ${rec.ranked[1][0]} (score ${rec.ranked[1][1]}/100)`);
+  L.push("");
+  L.push(`Estimated annual productivity loss: ${money(PER_WOMAN_INDIRECT)} AUD`);
+  const e = eff[rec.ranked[0][0]];
+  L.push(`Potential offset with ${rec.ranked[0][0]}: ${money(PER_WOMAN_INDIRECT * e)} AUD (${pct(e)} improvement)`);
+  L.push("");
+  L.push(`Dementia risk score: ${dem.total}/23 (${dem.riskLevel})`);
+  L.push(`  Classical: ${dem.classical}/12 | ARIA-H/Neurovasc: ${dem.aria}/11`);
+  if (dem.nvLevel !== "LOW") L.push(`  Neurovascular vulnerability: ${dem.nvLevel}`);
+  if (S.hasMri && S.cmb > 0) L.push(`  CMBs: ${S.cmb} | WMH: ${S.wmh ? "Yes" : "No"} | Siderosis: ${S.siderosis ? "Yes" : "No"}`);
+  if (S.apoe !== "Unknown" && S.apoe !== "Non-carrier") L.push(`  APOE: ${S.apoe}`);
+  return L;
+}
+
+function renderSummaryTab(kp, rec, dem){
+  const lines = summaryLines(kp, rec, dem);
+  let h = `<div class="tab-head"><h3>Clinical Summary Report</h3>
+    <p>Copy-ready for the medical record — regenerates as the patient profile changes</p></div>`;
+
+  h += `<div class="card"><h4>Summary</h4><div style="font-size:14px;color:var(--ink-2);margin-top:10px">${
+    lines.map(l => l === "" ? `<div style="height:10px"></div>`
+      : `<div style="padding:2px 0">${l.startsWith("  ") ? `<span style="padding-left:16px;color:var(--ink-3)" class="mono">${esc(l.trim())}</span>`
+        : `<b style="color:var(--ink)">${esc(l.split(":")[0])}:</b>${esc(l.slice(l.indexOf(":") + 1))}`}</div>`).join("")
+  }</div></div>`;
+
+  h += `<div class="card"><h4>Copy-friendly text</h4><p class="cap">Plain text, no formatting — paste straight into the record</p>
+    <textarea id="summary-text" readonly>${esc(lines.join("\n"))}</textarea>
+    <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+      <button class="btn primary" id="btn-copy" type="button">Copy to clipboard</button>
+      <span id="copy-note" style="font-size:12.5px;color:var(--ok)" hidden>Copied.</span>
+    </div></div>`;
+
+  h += `<div class="card"><h4>References</h4>
+    <ol class="refs">
+      <li>Metri NJ, Butt AS, Murali A, Steiner-Lim GZ, Lim CK (2023). Normative data on serum and plasma tryptophan and kynurenine concentrations from 8,089 individuals across 120 studies. <i>Int J Tryptophan Res</i>, 16:11786469231211184.</li>
+      <li>Metri NJ, et al. (2026). Complementary therapies for management of menopausal symptoms: IMS systematic review. <i>Climacteric</i>. DOI:10.1080/13697137.2025.2584061.</li>
+      <li>Metri NJ, et al. (2025). The MenoStim Trial. ACTRN12625000030471.</li>
+      <li>Gannott M (2025). Cost of Illness: Menopausal Cognitive &amp; Mood Symptoms in Australia.</li>
+      <li>Tewhaiti-Smith JMK, Gannott M, et al. (2025). The cost of endometriosis and chronic pelvic pain burden in New Zealand. <i>Women (MDPI)</i>, 5(4):47.</li>
+      <li>Rocca WA, et al. (2007). Increased risk of cognitive impairment or dementia in women who underwent oophorectomy before menopause. <i>Neurology</i>, 69(11):1074–1083.</li>
+      <li>Rocca WA, et al. (2021). Premenopausal bilateral oophorectomy and risk of MCI. <i>JAMA Netw Open</i>, 4(11):e2131448.</li>
+      <li>Maki PM (2013). Critical window hypothesis. <i>Menopause</i>.</li>
+      <li>Bake S, Segal M (2007). 17β-estradiol differentially regulates blood–brain barrier permeability. <i>Endocrinology</i>.</li>
+      <li>Giil LM, et al. (2016). Kynurenine pathway metabolites in dementia.</li>
+      <li>Guillemin GJ (2012). Quinolinic acid neurotoxicity review.</li>
+      <li>Stromberg C, et al. (2017). Estimating the burden and economic cost of exposure to occupational hazards.</li>
+    </ol></div>`;
+
+  document.getElementById("p-sum").innerHTML = h;
+}
+
+/* ══ Tabs ══════════════════════════════════════════════════════ */
+const TABS = [
+  {id:"kp",   label:"KP Risk Profile"},
+  {id:"tx",   label:"Treatment Pathway"},
+  {id:"cost", label:"Cost Analysis"},
+  {id:"dem",  label:"Dementia Risk"},
+  {id:"gaps", label:"Research Gaps"},
+  {id:"sum",  label:"Clinical Summary"}
+];
+function buildTabs(){
+  const nav = document.getElementById("tablist");
+  nav.innerHTML = TABS.map(t =>
+    `<button role="tab" id="t-${t.id}" aria-controls="p-${t.id}" aria-selected="${t.id === S.tab}" data-tab="${t.id}">${t.label}</button>`).join("");
+  nav.addEventListener("click", e => {
+    const btn = e.target.closest("button[data-tab]");
+    if (!btn) return;
+    S.tab = btn.dataset.tab;
+    syncTabs();
+  });
+}
+function syncTabs(){
+  TABS.forEach(t => {
+    document.getElementById("t-" + t.id).setAttribute("aria-selected", String(t.id === S.tab));
+    document.getElementById("p-" + t.id).hidden = (t.id !== S.tab);
+  });
+}
+
+/* ══ Panel wiring ══════════════════════════════════════════════ */
+function buildChecklists(){
+  document.getElementById("symptoms").innerHTML = SYMPTOM_OPTIONS.map((s, i) =>
+    `<label class="check"><input type="checkbox" id="sym-${i}" data-sym="${esc(s)}"${S.symptoms.includes(s) ? " checked" : ""}> ${esc(s)}</label>`).join("");
+  document.getElementById("risk-factors").innerHTML = RF_OPTIONS.map((s, i) =>
+    `<label class="check"><input type="checkbox" id="rf-${i}" data-rf="${esc(s)}"${S.riskFactors.includes(s) ? " checked" : ""}> ${esc(s)}</label>`).join("");
+}
+
+function syncPanel(){
+  document.getElementById("age").value = S.age;
+  document.getElementById("age-val").textContent = S.age;
+  document.getElementById("stage").value = S.stage;
+  document.getElementById("has-kp").checked = S.hasKp;
+  document.getElementById("kp-inputs").hidden = !S.hasKp;
+  document.getElementById("sample-type").value = S.sampleType;
+  document.getElementById("trp").value = S.trp;
+  document.getElementById("kyn").value = S.kyn;
+  const au = NORM_AU[S.sampleType + "_trp"], auK = NORM_AU[S.sampleType + "_kyn"];
+  document.getElementById("trp-hint").textContent = `AU normative: ${au.mean} ± ${au.sd} µM`;
+  document.getElementById("kyn-hint").textContent = `AU normative: ${auK.mean} ± ${auK.sd} µM`;
+  document.getElementById("has-mri").checked = S.hasMri;
+  document.getElementById("mri-inputs").hidden = !S.hasMri;
+  document.getElementById("cmb").value = S.cmb;
+  document.getElementById("wmh").checked = S.wmh;
+  document.getElementById("siderosis").checked = S.siderosis;
+  document.getElementById("apoe").value = S.apoe;
+  document.getElementById("use-au").checked = S.useAu;
+  SYMPTOM_OPTIONS.forEach((s, i) => { document.getElementById("sym-" + i).checked = S.symptoms.includes(s); });
+  RF_OPTIONS.forEach((s, i) => { document.getElementById("rf-" + i).checked = S.riskFactors.includes(s); });
+}
+
+function render(){
+  const kp = kpRiskScore(S.trp, S.kyn, S.sampleType, S.useAu, S.age);
+  const rec = recommendTreatment(kp, S.symptoms, S.age, S.stage);
+  const dem = dementiaAssessment(kp, S.hasKp, S.symptoms, S.riskFactors, S.hasMri, S.cmb, S.wmh, S.siderosis, S.apoe);
+  renderSummary(kp);
+  renderKpTab(kp);
+  renderTxTab(kp, rec);
+  renderCostTab(kp, rec);
+  renderDementiaTab(kp, dem);
+  renderGapsTab();
+  renderSummaryTab(kp, rec, dem);
+  syncTabs();
+}
+
+function wire(){
+  const panel = document.querySelector("aside.panel");
+
+  panel.addEventListener("input", e => {
+    const t = e.target;
+    if (t.id === "age"){ S.age = +t.value; document.getElementById("age-val").textContent = S.age; }
+    else if (t.id === "trp"){ S.trp = +t.value || 0; }
+    else if (t.id === "kyn"){ S.kyn = +t.value || 0; }
+    else if (t.id === "cmb"){ S.cmb = Math.max(0, Math.round(+t.value || 0)); }
+    else return;
+    render();
+  });
+
+  panel.addEventListener("change", e => {
+    const t = e.target;
+    if (t.id === "stage") S.stage = t.value;
+    else if (t.id === "has-kp"){
+      S.hasKp = t.checked;
+      const n = NORM_AU[S.sampleType + "_trp"], nk = NORM_AU[S.sampleType + "_kyn"];
+      if (S.hasKp){ S.trp = n.mean; S.kyn = nk.mean; }
+      else { S.trp = NORM.serum_trp.mean; S.kyn = NORM.serum_kyn.mean; S.sampleType = "serum"; }
+      syncPanel();
+    }
+    else if (t.id === "sample-type"){
+      S.sampleType = t.value;
+      S.trp = NORM_AU[S.sampleType + "_trp"].mean;
+      S.kyn = NORM_AU[S.sampleType + "_kyn"].mean;
+      syncPanel();
+    }
+    else if (t.id === "has-mri"){ S.hasMri = t.checked; document.getElementById("mri-inputs").hidden = !S.hasMri; }
+    else if (t.id === "wmh") S.wmh = t.checked;
+    else if (t.id === "siderosis") S.siderosis = t.checked;
+    else if (t.id === "apoe") S.apoe = t.value;
+    else if (t.id === "use-au") S.useAu = t.checked;
+    else if (t.dataset.sym){
+      const s = t.dataset.sym;
+      S.symptoms = t.checked ? [...S.symptoms, s] : S.symptoms.filter(x => x !== s);
+      S.symptoms = SYMPTOM_OPTIONS.filter(o => S.symptoms.includes(o));
+    }
+    else if (t.dataset.rf){
+      const s = t.dataset.rf;
+      S.riskFactors = t.checked ? [...S.riskFactors, s] : S.riskFactors.filter(x => x !== s);
+      S.riskFactors = RF_OPTIONS.filter(o => S.riskFactors.includes(o));
+    }
+    else return;
+    if (t.id === "has-mri" && !S.hasMri){ S.cmb = 0; S.wmh = false; S.siderosis = false; syncPanel(); }
+    render();
+  });
+
+  document.getElementById("btn-clear").addEventListener("click", () => {
+    S = Object.assign({}, DEFAULT_STATE, {symptoms:[], riskFactors:[], hasKp:false,
+      trp:NORM.serum_trp.mean, kyn:NORM.serum_kyn.mean, subAf:null, tab:S.tab});
+    syncPanel();
+    render();
+  });
+
+  /* sliders and buttons that live inside rendered panels */
+  document.querySelector("main").addEventListener("input", e => {
+    const t = e.target;
+    if (t.id === "uptake"){ S.uptake = +t.value; render(); }
+    else if (t.id === "pop-af"){ S.popAf = +t.value; render(); }
+    else if (t.id === "sub-af"){ S.subAf = +t.value; render(); }
+    else if (t.id === "sub-n"){ S.subN = +t.value; render(); }
+  });
+
+  document.querySelector("main").addEventListener("click", e => {
+    if (e.target.id !== "btn-copy") return;
+    const ta = document.getElementById("summary-text");
+    const done = () => {
+      const n = document.getElementById("copy-note");
+      n.hidden = false; setTimeout(() => { n.hidden = true; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(done, () => { ta.select(); done(); });
+    } else { ta.select(); document.execCommand("copy"); done(); }
+  });
+}
+
+buildTabs();
+buildChecklists();
+syncPanel();
+wire();
+render();
+</script>
