@@ -579,17 +579,16 @@ function bump(id,n){
   if(cart[id]<1)delete cart[id];
   save();
   $('live').textContent=count()?count()+' items, '+money(sum()):'Cart empty';
-  if($('v-menu').hidden===false)renderGrid();
+  if($('v-menu').hidden===false){renderGrid();renderBar();return;}
   if($('v-checkout').hidden===false){
+    if(!count()){renderGrid();show('v-menu');return;}
     renderCheckout();
-    if(!count()){show('v-menu');return;}
     $('barsum').textContent=money(sum());
   }
-  renderBar();
 }
 
 $('begin').onclick=function(){show('v-menu');renderGrid();};
-$('home').onclick=function(){show($('v-start').hidden?'v-start':'v-start');};
+$('home').onclick=function(){show('v-start');};
 $('back').onclick=function(){show('v-menu');renderGrid();};
 $('again').onclick=function(){cart={};save();show('v-start');};
 
