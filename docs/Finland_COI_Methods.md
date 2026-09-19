@@ -24,9 +24,9 @@ declared here because it is the single largest methodological determinant of the
 indirect-cost layer.
 
 The estimating engine is an adaptation of the published New Zealand endometriosis and
-chronic-pelvic-pain COI engine (Tewhaiti-Smith, Gannott et al., *Women* [MDPI]
-2025;5(4):47), extended here from a single-condition survey instrument to a fifty-condition,
-register-anchored, age-banded national account.
+chronic-pelvic-pain COI engine (Tewhaiti-Smith JMK, Gannott M, Semprini A, et al., *Women*
+[MDPI] 2025;5(4):47), extended here from a single-condition survey instrument to a
+fifty-condition, register-anchored, age-banded national account.
 
 The analysis is **bottom-up and condition-level**: each of the fifty conditions is costed
 independently from its own population denominator, its own unit costs and its own
@@ -62,6 +62,61 @@ particular (Section 3.3) is compressed by this exclusion.
 
 Out-of-pocket patient expenditure, informal-sector care purchases, travel and carer
 absenteeism are likewise excluded.
+
+### 1.2 Methodological lineage and citation chain
+
+This study is the fourth link in a continuous methodological chain, and each link is
+citable. The chain matters because the Finnish estimate is not a new instrument: it is an
+existing, published instrument applied at national scale for the first time.
+
+**1 · The productivity instrument.** Strömberg C, Aboagye E, Hagberg J, Bergström G,
+Lohela-Karlsson M. "Estimating the Effect and Economic Impact of Absenteeism,
+Presenteeism, and Work Environment-Related Problems on Reductions in Productivity from a
+Managerial Perspective." *Value in Health* 2017;20(8):1058–64.
+doi:10.1016/j.jval.2017.05.008 — establishes the three-way decomposition of productivity
+loss into absenteeism, presenteeism and work-environment-related problems, and the
+multipliers 1.97, 1.54 and 0.72, elicited from 758 Swedish managers describing a general
+workforce. Not women's-health-specific.
+
+**2 · The direct-cost instrument.** Simoens S, Dunselman G, Dirksen C, et al. "The burden
+of endometriosis: costs and quality of life of women with endometriosis and treated in
+referral centres." *Human Reproduction* 2012;27(5):1292–99. doi:10.1093/humrep/des073 —
+the WERF EndoCost tool, and the source of the endometriosis direct unit cost used here.
+
+**3 · The women's-health application.** Tewhaiti-Smith JMK, Gannott M, Semprini A, Bush D,
+Anderson A, Eathorne A, Johnson N, Girling JE, East M, Marriott J, Fisher R, Armour M.
+"The Cost of Endometriosis and Chronic Pelvic Pain Burden in New Zealand (Aotearoa):
+Results from a Nationwide Survey." *Women* 2025;5(4):47. doi:10.3390/women5040047 —
+Aotearoa New Zealand's first national COI for endometriosis and chronic pelvic pain,
+published 9 December 2025. It combines the WERF EndoCost tool with the Strömberg
+decomposition, and it is the **first application of the Strömberg multipliers to a
+women's health condition**, including the WEP decomposition. It draws on patient-reported
+outcomes, health-service use and productivity data covering more than 120,000 affected
+New Zealanders, and returns a national burden above NZ\$22 billion a year, of which
+roughly 65–75% is workplace productivity loss. That engine is what this study adapts.
+
+**4 · This study.** Finland, fifty conditions, 2026. The extension from link 3 is threefold:
+from one condition to fifty; from a survey population to register-anchored national
+denominators; and from an undifferentiated employed population to age-banded employment
+exposure (Section 5.1). The productivity construction itself is unchanged, which is why
+the Finnish result can be compared directly with the New Zealand one.
+
+**Adjacent precedent.** Riestenberg C, Jagasia A, Markovic D, Buyalos RP, Azziz R. "Health
+Care-Related Economic Burden of Polycystic Ovary Syndrome in the United States:
+Pregnancy-Related and Long-Term Health Consequences." *The Journal of Clinical
+Endocrinology & Metabolism* 2022;107(2):575–585. doi:10.1210/clinem/dgab613 — the
+standard-setting condition-level COI for polycystic ovary syndrome, and the closest
+methodological analogue outside the endometriosis line for costing a women's health
+condition together with its downstream consequences. It is the precedent for the
+consequence-chaining this model applies in the gestational diabetes → type 2 diabetes and
+pre-eclampsia → cardiovascular chains.
+
+*Nomenclature.* Riestenberg et al. and the entire pre-2026 literature use **PCOS**. The
+condition was renamed **PMOS** (polyendocrine metabolic ovarian syndrome) by Lancet global
+consensus (Teede et al., May 2026). This model carries the row as PMOS and cites the
+PCOS-era literature under its published name; ICD-10 still codes E28.2, and Finnish
+clinical coding is not expected to adopt the new term before approximately 2028. The two
+names denote the same condition, and no cost input changed with the rename.
 
 ---
 
@@ -102,8 +157,13 @@ of Finnish women to whom the condition's unit costs are applied in the reference
 `N_i` is a costed count, not a prevalence estimate, and the two are not interchangeable.
 
 Denominators are exact StatFin 2024 populations. The principal ones are women aged 15–49
-= 1,199,617 and women aged 45–65 = 721,153. The per-woman figure reported alongside the
-headline (€5,580.38) uses the total Finnish female population, ≈2.845 million.
+= 1,191,288 and women aged 45–65 = 721,153. The per-woman figure reported alongside the
+headline (€5,580.38) uses the total Finnish female population, 2,845,199.
+
+An earlier build carried 1,199,617 for the 15–49 band — a 2025 count — and it was reverted
+to the exact 2024 figure of 1,191,288 in the vintage pass. Both endometriosis (10.0% →
+119,129) and vulvodynia (3.8% → 45,269) reproduce exactly from 1,191,288 and from no other
+denominator, confirming that the costed populations follow the corrected figure.
 
 `N_i` is constructed on one of four explicitly declared bases, and the basis is recorded
 per row:
@@ -341,7 +401,7 @@ Two limitations of this transfer are declared rather than defended. First, the m
 were elicited from **758 Swedish managers** describing a general workforce; they are not
 condition-specific, not women-specific, and not Finnish. Their application to women's
 health conditions is a methodological extension first made in Tewhaiti-Smith, Gannott et
-al. (2025) and carried forward here. Second, because a multiplier above unity asserts that
+al. (2025) and carried forward here (Section 1.2). Second, because a multiplier above unity asserts that
 lost work costs more than the wage it displaced, the entire increment above the pure
 human-capital floor rests on that single transferred instrument. The model therefore
 publishes the multiplier-off estimate as a first-class result rather than a footnote
@@ -372,10 +432,12 @@ diabetes with gestational diabetes) are overwhelmingly positive, the absence of 
 matrix biases the estimate **upward**, and this is the one identified bias in the model
 that runs against conservatism.
 
-*Documentation note: the model's published narrative describes the dedup as applying to
-four conditions; the engine's own data array applies `J = 0.7935` to five, uterine fibroids
+*Documentation note (resolved 2026-09-19). The published narrative described the dedup as
+applying to four conditions; the engine applies `J = 0.7935` to five, uterine fibroids
 included, consistent with the pass in which fibroids was added as the fiftieth condition.
-The arithmetic above follows the engine. The prose should be reconciled to it.*
+The arithmetic is unaffected — `J` applies to indirect cost only and the fibroids indirect
+layer is a red-flag zero, so the dedup is inert on that row and the €669.3M swing stands.
+The site prose has been reconciled to the engine and the correction logged.*
 
 ---
 
@@ -473,10 +535,12 @@ zero-valued component moves the total up, not down. An illustrative ceiling exis
 engine's tornado sheet fills 37 of the 38 zero-presenteeism rows at a Schoep-half analog
 for a further €1,590.2M — and it is never used as a central value.
 
-*Reconciliation note: 38 and 16 are the counts computed directly from the engine's
-fifty-row array and are the correct figures. The published site table has separately
-displayed 18 and 20 for what should be the same tier; those are erroneous and should be
-corrected to 38 and 16.*
+*Verification note. 38 and 16 are the counts computed directly from the engine's
+fifty-row array. An earlier draft flagged the published site as showing 18 and 20 for the
+same tier; on inspection the site already carries 38 and 16 consistently across the
+Overview, Sources & Flags, the presentation deck and the internal desk page. That item is
+closed — but the white-paper pre-publication checklist still lists it as open and should
+be updated.*
 
 ---
 
@@ -535,10 +599,11 @@ adds **13,522,317** day-equivalents, for which no register exists. The total,
 **20,796,099** day-equivalents, is 83,518 full-time-equivalent workers at 249 days — 3.21%
 of Finland's 2,602,000 employed, or one worker in every 31.
 
-*Reconciliation note: an intermediate pass records the absence layer at 6.25M
-day-equivalents; the frozen central implies 7.27M following the later passes. Both sit
-below the register ceiling, but the pass-2 annotation should be updated to the frozen
-figure.*
+*Reconciliation note (resolved 2026-09-19). Pass 2 recorded the absence layer at 6.25M
+day-equivalents; passes 4–9 moved it, and the frozen central implies 7,273,509. Both sit
+below the register ceiling, so the validation claim was never affected. The pass line has
+been annotated with the freeze figure rather than overwritten, preserving the audit
+trail, and the correction logged.*
 
 **Arithmetic validation.** The published fifty-row array reproduces the engine's cached
 totals to the cent, and every equation in Section 5 has been independently recomputed from
@@ -609,8 +674,9 @@ and each is a query Finland can put to data it already holds:
 | Conditions costed | — | 50 | 8 clusters (12/8/8/6/5/5/3/3) |
 | Reference year (quantities) | — | 2024 | Latest complete register year |
 | Price level | — | 2026 EUR | HICP / earnings index |
-| Women 15–49 | — | 1,199,617 | StatFin 2024, exact |
+| Women 15–49 | — | 1,191,288 | StatFin 2024, exact (1,199,617 was a 2025 count, retired) |
 | Women 45–65 | — | 721,153 | StatFin 2024, exact |
+| Total female population | — | 2,845,199 | StatFin 2024, exact |
 | Female median monthly earnings | — | €3,376 (€3,549 in 2026 EUR) | StatFin Structure of Earnings 2024 |
 | Working days per year | `Δ` | 249 | **Assumption — flagged** |
 | Daily wage, 2026 EUR | `w` | €171.04 | Derived |
@@ -672,9 +738,15 @@ and Economic Impact of Absenteeism, Presenteeism, and Work Environment-Related P
 Reductions in Productivity from a Managerial Perspective. *Value in Health*.
 2017;20(8):1058–1064. doi:10.1016/j.jval.2017.05.008
 
-Tewhaiti-Smith J, Gannott M, Semprini A, et al. The Cost of Endometriosis and Chronic
+Tewhaiti-Smith JMK, Gannott M, Semprini A, Bush D, Anderson A, Eathorne A, Johnson N,
+Girling JE, East M, Marriott J, Fisher R, Armour M. The Cost of Endometriosis and Chronic
 Pelvic Pain Burden in New Zealand (Aotearoa): Results from a Nationwide Survey. *Women*.
 2025;5(4):47. doi:10.3390/women5040047
+
+Riestenberg C, Jagasia A, Markovic D, Buyalos RP, Azziz R. Health Care-Related Economic
+Burden of Polycystic Ovary Syndrome in the United States: Pregnancy-Related and Long-Term
+Health Consequences. *The Journal of Clinical Endocrinology & Metabolism*.
+2022;107(2):575–585. doi:10.1210/clinem/dgab613
 
 Simoens S, Dunselman G, Dirksen C, et al. The burden of endometriosis: costs and quality
 of life of women with endometriosis and treated in referral centres. *Human Reproduction*.
