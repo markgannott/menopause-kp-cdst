@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Endometriosis Console</title>
+<meta name="description" content="What endometriosis costs, in three countries that have actually counted it — one method, graded sources, and the delay layer kept separate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff; --surface:#EEF1F6; --panel:#fff; --hairline:#D3D9E4;
+  --ink:#1D2440; --ink2:#2C3557; --muted:#5A6684; --muted2:#7A86A3;
+  --navy:#224B90; --navy-deep:#1D2440; --blue:#3672D7; --orange:#E27D39; --purple:#905B97;
+  --c-direct:#224B90; --c-absent:#3672D7; --c-present:#7FA7E8; --c-wep:#B9CDF2;
+  --grade-a:#0A7A3D; --grade-b:#3672D7; --grade-c:#B3690F; --grade-d:#B03535;
+  --flag-bg:#FCECEC; --flag-ink:#B03535; --tint-blue:#EAF0FB;
+  --serif:'Gelasio',Georgia,serif;
+  --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --card:1.5rem; --small:.75rem; --pill:999px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10152A; --surface:#171D33; --panel:#1A2139; --hairline:#303954;
+    --ink:#EEF1F6; --ink2:#D7DEEC; --muted:#9AA6C2; --muted2:#7D89A8;
+    --navy:#8FB0E8; --navy-deep:#C6D6F2; --blue:#7FA7E8; --orange:#F0A472;
+    --c-direct:#5E8BD8; --c-absent:#7FA7E8; --c-present:#A6C2EE; --c-wep:#C9D9F4;
+    --grade-a:#4FBE82; --grade-b:#7FA7E8; --grade-c:#E0A155; --grade-d:#E27B7B;
+    --flag-bg:#3A2020; --flag-ink:#E89A9A; --tint-blue:#1E2942;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10152A; --surface:#171D33; --panel:#1A2139; --hairline:#303954;
+  --ink:#EEF1F6; --ink2:#D7DEEC; --muted:#9AA6C2; --muted2:#7D89A8;
+  --navy:#8FB0E8; --navy-deep:#C6D6F2; --blue:#7FA7E8; --orange:#F0A472;
+  --c-direct:#5E8BD8; --c-absent:#7FA7E8; --c-present:#A6C2EE; --c-wep:#C9D9F4;
+  --grade-a:#4FBE82; --grade-b:#7FA7E8; --grade-c:#E0A155; --grade-d:#E27B7B;
+  --flag-bg:#3A2020; --flag-ink:#E89A9A; --tint-blue:#1E2942;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
+  font-size:1.0625rem;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:80rem;margin:0 auto;padding:0 40px}
+@media screen and (max-width:700px){.wrap{padding:0 16px}}
+h1,h2,h3{font-weight:500;line-height:1.16;margin:0}
+.eyebrow{font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 .6rem}
+.lede{font-size:1.02rem;color:var(--ink2);max-width:62ch}
+.cap{font-family:var(--sans);font-size:.74rem;color:var(--muted);line-height:1.5}
+
+/* masthead */
+.tb{border-bottom:1px solid var(--hairline);background:var(--panel);position:sticky;top:0;z-index:20}
+.tb-in{max-width:80rem;margin:0 auto;padding:.7rem 40px;display:flex;gap:1rem;
+  align-items:baseline;flex-wrap:wrap}
+@media screen and (max-width:700px){.tb-in{padding:.7rem 16px}}
+.tb-brand{font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.04em;color:var(--navy)}
+.tb-tag{font-family:var(--sans);font-size:.7rem;color:var(--muted);letter-spacing:.02em}
+.tb-sp{flex:1}
+.tb-th{font-family:var(--sans);font-size:.7rem;color:var(--muted);background:none;
+  border:1px solid var(--hairline);border-radius:var(--pill);padding:.25rem .7rem;cursor:pointer}
+
+/* hero */
+.hero{padding:3.4rem 0 2.2rem;border-bottom:1px solid var(--hairline)}
+.hero h1{font-size:2.6rem;letter-spacing:-.01em}
+@media screen and (max-width:700px){.hero h1{font-size:1.9rem}}
+.hero .lede{margin-top:1rem}
+
+/* stat frame */
+.frame{border:1px solid var(--hairline);border-radius:var(--card);overflow:hidden;
+  background:var(--panel);margin:2rem 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr)}
+@media screen and (max-width:860px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media screen and (max-width:520px){.grid3,.grid4{grid-template-columns:1fr}}
+.cell{padding:1.3rem 1.4rem;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.cell:last-child{border-right:0}
+.v{font-family:var(--sans);font-weight:700;font-size:1.9rem;letter-spacing:-.02em;
+  color:var(--navy);line-height:1.1}
+.v small{font-size:.9rem;font-weight:700;color:var(--muted)}
+.l{font-family:var(--sans);font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--muted);margin-top:.45rem}
+.n{font-size:.8rem;color:var(--muted);margin-top:.5rem;font-family:var(--sans);line-height:1.45}
+
+section{padding:3.2rem 0;border-bottom:1px solid var(--hairline)}
+section h2{font-size:1.9rem;margin-bottom:.5rem}
+@media screen and (max-width:700px){section h2{font-size:1.5rem}}
+
+/* bars */
+.bars{margin:1.6rem 0 .6rem}
+.row{display:grid;grid-template-columns:15rem 1fr 6rem;gap:.9rem;align-items:center;
+  padding:.42rem 0}
+@media screen and (max-width:760px){.row{grid-template-columns:1fr;gap:.25rem}
+  .row .bv{text-align:left}}
+.bl{font-family:var(--sans);font-size:.8rem;color:var(--ink2)}
+.bt{background:var(--surface);border-radius:var(--pill);height:15px;overflow:hidden}
+.bf{height:100%;border-radius:var(--pill)}
+.bv{font-family:var(--sans);font-weight:700;font-size:.8rem;text-align:right;color:var(--ink2)}
+
+/* stacked */
+.stack{display:flex;height:42px;border-radius:var(--small);overflow:hidden;margin:1.2rem 0 .8rem}
+.seg{display:flex;align-items:center;justify-content:center;font-family:var(--sans);
+  font-weight:700;font-size:.74rem;color:#fff;min-width:0}
+.key{display:flex;flex-wrap:wrap;gap:1.1rem;font-family:var(--sans);font-size:.76rem;color:var(--ink2)}
+.key i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:.4rem;
+  vertical-align:-1px}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.8rem;margin-top:1.2rem}
+th{text-align:left;text-transform:uppercase;letter-spacing:.08em;font-size:.66rem;
+  color:var(--muted);border-bottom:2px solid var(--ink);padding:.55rem .5rem}
+td{border-bottom:1px solid var(--hairline);padding:.62rem .5rem;vertical-align:top;color:var(--ink2)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.64rem;
+  padding:.1rem .45rem;border-radius:var(--pill);border:1px solid currentColor}
+.ga{color:var(--grade-a)} .gb{color:var(--grade-b)} .gc{color:var(--grade-c)} .gd{color:var(--grade-d)}
+
+/* callout */
+.callout{border-left:3px solid var(--orange);background:var(--surface);
+  border-radius:0 var(--small) var(--small) 0;padding:1rem 1.2rem;margin:1.6rem 0}
+.callout.blue{border-left-color:var(--blue)}
+.callout h4{font-family:var(--sans);font-size:.78rem;text-transform:uppercase;
+  letter-spacing:.08em;margin:0 0 .4rem;color:var(--ink)}
+.callout p{margin:0;font-size:.92rem;color:var(--ink2)}
+.callout p + p{margin-top:.6rem}
+
+footer{padding:2.4rem 0 3.2rem;font-family:var(--sans);font-size:.76rem;color:var(--muted)}
+footer a{color:var(--navy)}
+a{color:var(--navy)}
+@media (prefers-reduced-motion:no-preference){.bf{transition:width .5s ease}}
+</style>
+</head>
+<body>
+
+<div class="tb"><div class="tb-in">
+  <span class="tb-brand">SUNCOAST VENTURES</span>
+  <span class="tb-tag">Endometriosis · cost of illness · three jurisdictions</span>
+  <span class="tb-sp"></span>
+  <button class="tb-th" id="th">Theme</button>
+</div></div>
+
+<div class="wrap">
+
+<div class="hero">
+  <p class="eyebrow">Evidence console · v1 · September 2026</p>
+  <h1>Endometriosis is the most expensive single condition<br>in every national account that has bothered to count it.</h1>
+  <p class="lede">Three countries have now costed endometriosis properly — Australia in 2019, New Zealand in 2025, Finland in 2026. They used different instruments and different populations and they agree on the thing that matters: the bill is mostly not a health-system bill. It is work that never happens.</p>
+</div>
+
+<section>
+  <p class="eyebrow">The three counts</p>
+  <h2>Same condition, three national accounts</h2>
+  <p class="lede">These are not comparable totals — different scopes, currencies and years — so they are shown as three separate findings, not one number.</p>
+
+  <div class="frame"><div class="grid3">
+    <div class="cell">
+      <div class="v">€1,831<small>M</small></div>
+      <div class="l">Finland · endometriosis alone</div>
+      <div class="n">119,129 costed women. The largest of fifty conditions, 11.5% of the €15,877M national women's-health bill. Grade B.</div>
+    </div>
+    <div class="cell">
+      <div class="v">Int$6.50<small>B</small></div>
+      <div class="l">Australia · endo + chronic pelvic pain</div>
+      <div class="n">National burden at 10% prevalence in the reproductive-aged population. Int$16,970–20,898 per woman per year.</div>
+    </div>
+    <div class="cell">
+      <div class="v">NZ$22<small>B+</small></div>
+      <div class="l">New Zealand · endo + chronic pelvic pain</div>
+      <div class="n">First national COI for Aotearoa. Survey of more than 120,000 affected people, WERF EndoCost tool plus Strömberg decomposition.</div>
+    </div>
+  </div></div>
+
+  <div class="callout blue">
+    <h4>What the three have in common</h4>
+    <p>Productivity loss is the dominant account in all three, and the range is narrow given how different the methods are: <b>74.5%</b> of the Finnish total, <b>75–84%</b> of the Australian, <b>65–75%</b> of the New Zealand. No health ministry's budget line sees any of it.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Where the money actually sits</p>
+  <h2>Finland, decomposed</h2>
+  <p class="lede">The Finnish engine is the only one of the three that splits productivity three ways, so it is the one that shows where inside the workplace the cost lands.</p>
+
+  <div class="stack" id="stk"></div>
+  <div class="key">
+    <span><i style="background:var(--c-direct)"></i>Direct health <b>€466.5M</b></span>
+    <span><i style="background:var(--c-absent)"></i>Absenteeism <b>€375.0M</b></span>
+    <span><i style="background:var(--c-present)"></i>Presenteeism <b>€684.0M</b></span>
+    <span><i style="background:var(--c-wep)"></i>Employer-borne <b>€305.6M</b></span>
+  </div>
+  <p class="cap" style="margin-top:.9rem">Presenteeism — work lost while a woman is still at her desk — is the single largest account, larger than all direct health spending on the condition. It is also the account for which no register exists in any of the three countries.</p>
+
+  <div class="frame"><div class="grid4">
+    <div class="cell"><div class="v">€15,371</div><div class="l">Total cost per affected woman / yr</div></div>
+    <div class="cell"><div class="v">€3,916</div><div class="l">Direct health cost per woman / yr</div></div>
+    <div class="cell"><div class="v">15.6</div><div class="l">Absence days per employed woman / yr</div></div>
+    <div class="cell"><div class="v">14.6%</div><div class="l">Working time lost to impairment</div></div>
+  </div></div>
+</section>
+
+<section>
+  <p class="eyebrow">The delay layer</p>
+  <h2>€14,618M sits in the eight and a half years before diagnosis</h2>
+  <p class="lede">Diagnostic delay is costed separately and deliberately kept out of the annual figure: it is an accumulated stock, not a yearly flow. It is also, by a wide margin, the largest recoverable number attached to this condition anywhere in the model.</p>
+
+  <div class="frame"><div class="grid3">
+    <div class="cell"><div class="v">8.5 <small>yrs</small></div><div class="l">Time to diagnosis, Finland</div>
+      <div class="n">The longest delay carried by any of the fifty conditions.</div></div>
+    <div class="cell"><div class="v">€14,618<small>M</small></div><div class="l">Accumulated delay burden</div>
+      <div class="n">Eight times the annual bill. Half the entire €28,926M national delay layer.</div></div>
+    <div class="cell"><div class="v">€1,720<small>M/yr</small></div><div class="l">Productivity lost per year of delay</div>
+      <div class="n">Every year cut off the diagnostic odyssey is worth roughly this much.</div></div>
+  </div></div>
+
+  <div class="callout">
+    <h4>Method flag — found while building this console</h4>
+    <p>The delay layer is computed on <b>un-deduplicated</b> indirect cost. The annual figure applies the menstrual-cluster overlap factor <code>J = 0.7935</code>; the delay figure divides it back out. Endometriosis: €1,364.7M annual indirect ÷ 0.7935 × 8.5 years = €14,618.4M. The same is true of adenomyosis, HMB, dysmenorrhea and fibroids, and therefore of the €28,926M national delay total.</p>
+    <p>This may be deliberate — the delay window predates the diagnoses that overlap — but it is not stated anywhere, and the two layers are not on the same basis. Worth a ruling before the delay number is quoted next to the annual one.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">The cluster</p>
+  <h2>Endometriosis does not arrive alone</h2>
+  <p class="lede">Ten pelvic and menstrual conditions in the Finnish model carry €4,723M between them. Endometriosis is 39% of that, and four of the ten share a diagnostic odyssey with it.</p>
+  <div class="bars" id="cluster"></div>
+  <p class="cap">Annual cost, €M, Finland 2026. Letters are source grades. Rows marked ◇ carry the shared menstrual-cluster overlap correction.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Who carries it</p>
+  <h2>Three quarters of the burden lands before 45</h2>
+  <p class="lede">The age distribution is what separates endometriosis from most expensive conditions: it peaks exactly where employment, earnings and pension accumulation peak, and it is nearly spent by the time most chronic disease begins.</p>
+  <div class="bars" id="ages"></div>
+  <p class="cap">Share of endometriosis cases by age band, Finland model. Modelled allocation from literature age gradients — flagged for replacement by HILMO diagnosis-date distributions.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Evidence</p>
+  <h2>What each number rests on</h2>
+  <table>
+    <thead><tr><th>Input</th><th>Grade</th><th>Source</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Costed population, Finland (119,129)</td><td><span class="chip gb">B</span></td>
+        <td>10% of women 15–49 (1,191,288, StatFin 2024); Saavalainen 2018 surgical floor ≈50k; 200k all-ages ceiling</td><td>Band midpoint</td></tr>
+      <tr><td>Direct cost, €3,915.60/woman</td><td><span class="chip gb">B</span></td>
+        <td>Simoens 2012 WERF EndoCost, HICP-normalised to 2026 EUR; corroborated against a Finnish hospital-district figure of ≈€3,114</td><td>Two independent anchors</td></tr>
+      <tr><td>Absence, 15.58 days</td><td><span class="chip gb">B</span></td>
+        <td>EndoCost productivity split ≈30/70 absence/presenteeism</td><td>2009 price year flagged</td></tr>
+      <tr><td>Presenteeism, 14.6%</td><td><span class="chip gb">B</span></td>
+        <td>EndoCost productivity component</td><td>One of only 12 of 50 rows with any presenteeism source at all</td></tr>
+      <tr><td>Diagnostic delay, 8.5 years</td><td><span class="chip gc">C</span></td>
+        <td>International literature; no Finnish time-to-diagnosis series exists</td><td>Drives the single largest number on this page</td></tr>
+      <tr><td>Australia, Int$6.50B</td><td><span class="chip gb">B</span></td>
+        <td>Armour, Lawson, Wood, Smith, Abbott — PLOS ONE 2019;14(10):e0223316</td><td>National online survey, 2017 fieldwork</td></tr>
+      <tr><td>New Zealand, NZ$22B+</td><td><span class="chip gb">B</span></td>
+        <td>Tewhaiti-Smith, Gannott, Semprini et al. — <i>Women</i> 2025;5(4):47</td><td>Endo + CPP combined; not endo alone</td></tr>
+      <tr><td>Kela sickness-allowance line for endometriosis</td><td><span class="chip gd">—</span></td>
+        <td>Does not exist</td><td><b>White space.</b> The largest condition in the Finnish model is invisible to the register that pays for it</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <h4>The four things that would replace modelling with measurement</h4>
+    <p>1 · A Kela sickness-allowance code endometriosis can be seen under. 2 · HILMO diagnosis dates, which would replace the age distribution on this page and the 8.5-year delay with measured values. 3 · A Finnish time-to-diagnosis series — the delay number is the weakest input carrying the largest figure. 4 · A presenteeism instrument, in any of the three countries, on any condition.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Method</p>
+  <h2>One engine, three applications</h2>
+  <p class="lede">Societal perspective, human-capital approach. Direct costs scale to the full affected population; indirect costs scale only to the employed affected population, by age band. Productivity is decomposed with Strömberg multipliers — 1.97 absenteeism, 1.54 presenteeism, 0.72 applied to the employer-borne increment only — so the construction is identical across jurisdictions and the results can be read against each other.</p>
+  <p class="lede" style="margin-top:.8rem">The lineage is continuous and citable: Strömberg 2017 (the productivity instrument) → Simoens 2012 / WERF EndoCost (the direct-cost instrument) → Tewhaiti-Smith, Gannott et al. 2025 (first application of the Strömberg decomposition to a women's health condition) → the Finnish fifty-condition build, 2026.</p>
+  <p class="cap" style="margin-top:1rem">Finnish figures are 2026 euros, reference year 2024, drawn from <code>Finland_WH_COI_REBUILT_AgeBanded (Gannott 2026).xlsx</code> and independently recomputed from the published per-condition inputs for this console. Australian figures are international dollars as published. New Zealand figures are NZD as published.</p>
+</section>
+
+<footer class="wrap" style="padding-left:0;padding-right:0">
+  <p><b>The Endometriosis Console</b> · v1, 19 September 2026 · Suncoast Ventures.<br>
+  Model and health economics: Mark Gannott. Built on the Finland women's-health COI engine and the published New Zealand engine.</p>
+  <p style="margin-top:.8rem">Company overlay not yet applied — this build is condition-first and deliberately company-agnostic, so it can be pointed at whichever company the thesis lands on.</p>
+</footer>
+</div>
+
+<script>
+const FIN = {direct:466.5, absent:375.0, present:684.0, wep:305.6, total:1831.1};
+const stack = [["--c-direct",FIN.direct],["--c-absent",FIN.absent],["--c-present",FIN.present],["--c-wep",FIN.wep]];
+document.getElementById("stk").innerHTML = stack.map(([c,v])=>
+  `<div class="seg" style="flex:${v} 0 0;background:var(${c})">${(v/FIN.total*100).toFixed(0)}%</div>`).join("");
+
+const CLUSTER = [
+  ["Endometriosis",1831.1,"B",true],["Dysmenorrhea (primary)",1033.0,"B",true],
+  ["IBS / gut dysfunction",787.0,"B",false],["Heavy menstrual bleeding",534.7,"C",true],
+  ["Infertility (female-factor)",202.5,"B",false],["Adenomyosis",149.4,"C",true],
+  ["Interstitial cystitis / BPS",70.6,"A",false],["Vulvodynia",70.5,"C",false],
+  ["Uterine fibroids",25.4,"C",true],["Pelvic organ prolapse",18.6,"A",false]];
+const GC={A:"--grade-a",B:"--grade-b",C:"--grade-c",D:"--grade-d"};
+const mx = Math.max(...CLUSTER.map(r=>r[1]));
+document.getElementById("cluster").innerHTML = CLUSTER.map(([n,v,g,d])=>
+  `<div class="row"><div class="bl">${n}${d?" ◇":""} <span class="chip ${'g'+g.toLowerCase()}">${g}</span></div>
+   <div class="bt"><div class="bf" style="width:${v/mx*100}%;background:var(${GC[g]})"></div></div>
+   <div class="bv">€${v.toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1})}M</div></div>`).join("");
+
+const AGES=[["15–24",10],["25–34",35],["35–44",35],["45–54",15],["55–64",5],["65+",0]];
+document.getElementById("ages").innerHTML = AGES.map(([n,v])=>
+  `<div class="row"><div class="bl">${n}</div>
+   <div class="bt"><div class="bf" style="width:${v/35*100}%;background:var(--navy)"></div></div>
+   <div class="bv">${v}%</div></div>`).join("");
+
+const th=document.getElementById("th");
+try{ const s=localStorage.getItem("endo-theme"); if(s) document.documentElement.dataset.theme=s; }catch(e){}
+th.onclick=()=>{ const cur=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=cur; try{localStorage.setItem("endo-theme",cur);}catch(e){} };
+</script>
+</body>
+</html>
